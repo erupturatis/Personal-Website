@@ -39,13 +39,36 @@ export async function huskyScript(params: paramsHuskyScript) {
 
         // calculates new eye position
         let radiusLeft: number = 5 * params.scale;
-        let radiusRight: number = 8 * params.scale;
-        let movementSmoothing: number = 0.4;
+        let radiusRight: number = 10 * params.scale;
+        let movementSmoothing: number = 0.1;
 
-        const leftEyeNewX = params.leftEyeBaseX + Math.cos(leftEyeAngle) * radiusLeft;
-        const leftEyeNewY = params.leftEyeBaseY + Math.sin(leftEyeAngle) * radiusLeft;
-        const rightEyeNewX = params.rightEyeBaseX + Math.cos(rightEyeAngle) * radiusRight;
-        const rightEyeNewY = params.rightEyeBaseY + Math.sin(rightEyeAngle) * radiusRight;
+        // calculates all displacements
+        let leftEyeDisplacementX: number = Math.cos(leftEyeAngle) * radiusLeft;
+        let leftEyeDisplacementY: number = Math.sin(leftEyeAngle) * radiusLeft;
+        let rightEyeDisplacementX: number = Math.cos(rightEyeAngle) * radiusRight;
+        let rightEyeDisplacementY: number = Math.sin(rightEyeAngle) * radiusRight;
+
+        const leftEyeExpectedX = params.leftEyeBaseX + leftEyeDisplacementX;
+        const leftEyeExpectedY = params.leftEyeBaseY + leftEyeDisplacementY;
+        const rightEyeExpectedX = params.rightEyeBaseX + rightEyeDisplacementX;
+        const rightEyeExpectedY = params.rightEyeBaseY + rightEyeDisplacementY;
+
+        // getting current eye position
+        const leftEyeCurrentX = parseFloat(this.leftEye.getAttribute('x'));
+        const leftEyeCurrentY = parseFloat(this.leftEye.getAttribute('y'));
+        const rightEyeCurrentX = parseFloat(this.rightEye.getAttribute('x'));
+        const rightEyeCurrentY = parseFloat(this.rightEye.getAttribute('y'));
+
+        // calculating diff between expected and current position
+        const leftEyeDiffX = leftEyeExpectedX - leftEyeCurrentX;
+        const leftEyeDiffY = leftEyeExpectedY - leftEyeCurrentY;
+        const rightEyeDiffX = rightEyeExpectedX - rightEyeCurrentX;
+        const rightEyeDiffY = rightEyeExpectedY - rightEyeCurrentY;
+        // calculates new eye position
+        const leftEyeNewX = leftEyeCurrentX + leftEyeDiffX * movementSmoothing;
+        const leftEyeNewY = leftEyeCurrentY + leftEyeDiffY * movementSmoothing;
+        const rightEyeNewX = rightEyeCurrentX + rightEyeDiffX * movementSmoothing;
+        const rightEyeNewY = rightEyeCurrentY + rightEyeDiffY * movementSmoothing;
 
         // sets new eye position
         this.leftEye.setAttribute('x', leftEyeNewX.toString());
@@ -54,6 +77,7 @@ export async function huskyScript(params: paramsHuskyScript) {
         this.rightEye.setAttribute('y', rightEyeNewY.toString());
     };
 
+    const loopSmooth = () => {};
     document.addEventListener('mousemove', mouseCoordUpdate);
     // gets reference to husky eyes
     const leftEye = document.querySelector('#lefteye');
