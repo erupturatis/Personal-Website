@@ -9,4 +9,8 @@ const Home = () => {
     );
 };
 
+export async function getStaticProps() {
+    return {};
+}
+
 export default Home;
