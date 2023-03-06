@@ -8,9 +8,4 @@ const Home = () => {
         </div>
     );
 };
-
-export async function getStaticProps() {
-    return {};
-}
-
 export default Home;
