@@ -10,6 +10,8 @@ export type paramsHuskyScript = {
     rightEyeCenterOffsetX: number;
     rightEyeCenterOffsetY: number;
     scale: number;
+    scrollEyes?: boolean;
+    baseSize?: number;
 };
 
 export async function huskyScript(params: paramsHuskyScript) {
@@ -26,6 +28,13 @@ export async function huskyScript(params: paramsHuskyScript) {
             setInterval(loop, 1000 / 60);
         }
     };
+
+    const scrollUpdater = () => {
+        const scrollY = window.scrollY;
+        this.mouseY = scrollY + params.baseSize / 2;
+        this.mouseX = window.innerWidth / 2;
+    };
+
     const loop = () => {
         // calculates vector from center of eyes to mouse
         const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX);
@@ -76,10 +85,13 @@ export async function huskyScript(params: paramsHuskyScript) {
         this.rightEye.setAttribute('x', rightEyeNewX.toString());
         this.rightEye.setAttribute('y', rightEyeNewY.toString());
     };
-
-    const loopSmooth = () => {};
-    document.addEventListener('mousemove', mouseCoordUpdate);
-    // gets reference to husky eyes
+    if (params.scrollEyes) {
+        setInterval(scrollUpdater, 1000 / 60);
+        setInterval(loop, 1000 / 60);
+    } else {
+        document.addEventListener('mousemove', mouseCoordUpdate);
+        // gets reference to husky eyes
+    }
     const leftEye = document.querySelector('#lefteye');
     const rightEye = document.querySelector('#righteye');
 

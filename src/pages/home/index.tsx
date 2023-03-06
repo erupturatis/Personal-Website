@@ -5,6 +5,13 @@ const Home = ({}) => {
     return (
         <div>
             <Husky scale={1} />
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
+            <div className=" h-96">ceva</div>
         </div>
     );
 };
