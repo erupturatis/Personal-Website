@@ -10,7 +10,7 @@ const Home = ({}) => {
 };
 
 export async function getStaticProps() {
-    return {};
+    return { props: {} };
 }
 
 export default Home;
