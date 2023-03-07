@@ -14,19 +14,19 @@ const Home = ({}) => {
   const [windowWidth, setWindowWidth] = useState(null);
   useEffect(() => {
     setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', () => {
+      setWindowWidth(window.innerWidth);
+    });
   }, []);
   return (
-    <div>
-      <div className={` absolute ${windowWidth > 768 ? ' right-40 top-40' : ''} `}>
-        {windowWidth !== null ? <>{windowWidth > 768 ? <Husky scale={0.8} /> : <Husky scale={0.5} />}</> : <></>}
+    <div className="relative w-screen ml-0">
+      <div className={`  ${windowWidth > 768 ? 'absolute right-40 top-40' : ' flex justify-center w-full mt-40  z-0 relative'} `}>
+        {windowWidth !== null ? <>{windowWidth > 768 ? <Husky scale={1} scrollEyes={false} /> : <Husky scale={0.65} scrollEyes={true} />}</> : <></>}
       </div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
-      <div className=" h-96">ceva</div>
+      <div className=" border-2 border-green-400 w-96 h-32 absolute top-10 z-[10]"></div>
+      <div className="h-96"></div>
+      <div className="h-96"></div>
+      <div className="h-96"></div>
     </div>
   );
 };

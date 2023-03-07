@@ -19,11 +19,10 @@ type navButtonProps = {
 };
 
 const NavButton = ({ inverse, text, link, mobile }: navButtonProps) => {
-  console.log(mobile);
   return (
-    <div className={`${mobile ? 'w-full ' : ''} flex justify-center items-center  my-8  md:mt-4 md:mb-4 md:mr-8 md:ml-8 `}>
+    <div className={`${mobile ? 'w-full ' : ''} flex justify-center items-center  my-8  md:mt-4 md:mb-4 md:mr-10 md:ml-10 `}>
       <div
-        className={` ${!inverse ? roboto400.className : roboto500.className}  text-white font-light text-2xl ${
+        className={` ${!inverse ? roboto400.className : roboto500.className}  text-white font-light text-xl${
           mobile ? ` bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-lg` : ''
         } `}
       >

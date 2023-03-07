@@ -8,3 +8,8 @@
 body {
   background-color: #0d0d0e;
 }
+
+svg {
+  position: relative;
+  z-index: -1;
+}

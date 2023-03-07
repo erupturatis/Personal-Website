@@ -36,11 +36,13 @@ export async function huskyScript(params: paramsHuskyScript) {
   };
 
   const loop = () => {
+    let rect = svg?.getBoundingClientRect();
+    this.rect = rect;
     // calculates vector from center of eyes to mouse
-    const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX);
-    const leftEyeY = this.mouseY - (params.leftEyeBaseY + params.leftEyeCenterOffsetX);
-    const rightEyeX = this.mouseX - (params.rightEyeBaseX + params.rightEyeCenterOffsetX);
-    const rightEyeY = this.mouseY - (params.rightEyeBaseY + params.rightEyeCenterOffsetY);
+    const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
+    const leftEyeY = this.mouseY - (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);
+    const rightEyeX = this.mouseX - (params.rightEyeBaseX + params.rightEyeCenterOffsetX + this.rect.x);
+    const rightEyeY = this.mouseY - (params.rightEyeBaseY + params.rightEyeCenterOffsetY + this.rect.y);
 
     // calculates angle of vector
     const leftEyeAngle = Math.atan2(leftEyeY, leftEyeX);
@@ -92,6 +94,8 @@ export async function huskyScript(params: paramsHuskyScript) {
     document.addEventListener('mousemove', mouseCoordUpdate);
     // gets reference to husky eyes
   }
+  let svg = document.querySelector('#huskySvg');
+
   const leftEye = document.querySelector('#lefteye');
   const rightEye = document.querySelector('#righteye');
 
