@@ -16,12 +16,14 @@ type navButtonProps = {
   text: string;
   link: string;
   inverse: boolean;
-  mobile: boolean;
-  openNav?: () => void;
 };
 
-const NavButton = ({ inverse, text, link, mobile, openNav }: navButtonProps) => {
-  return <div></div>;
+const NavButtonDesktop = () => {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
 };
 
-export default NavButton;
+export default NavButtonDesktop;

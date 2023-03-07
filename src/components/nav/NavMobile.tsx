@@ -1,13 +1,39 @@
 import React from 'react';
-import { useState } from 'react';
-import NavButton from './NavButton';
+import { useState, useEffect } from 'react';
+import NavButtonMobile from './NavButtonMobile';
 
+type body = null | HTMLBodyElement;
 const NavMobile = () => {
   const [open, setOpen] = useState(false);
+  const [body, setBody] = useState<body>(null);
+
+  useEffect(() => {
+    setBody(document.querySelector('body'));
+  }, []);
+
+  function disableScroll() {
+    if (body) body.style.overflow = 'hidden';
+  }
+
+  function enableScroll() {
+    if (body) body.style.overflow = '';
+  }
   return (
     <div>
       <div className="fixed w-full top-0 z-[10] ">
-        <div onClick={() => setOpen((open) => !open)} className="text-3xl z-[10]  absolute right-8 top-6 cursor-pointer md:hidden ">
+        <div
+          onClick={() =>
+            setOpen((open) => {
+              if (open) {
+                disableScroll();
+              } else {
+                enableScroll();
+              }
+              return !open;
+            })
+          }
+          className="text-3xl z-[20]  absolute right-8 top-6 cursor-pointer md:hidden "
+        >
           <svg viewBox="0 0 25 25" width="25" height="25">
             {open ? (
               <>
@@ -26,13 +52,36 @@ const NavMobile = () => {
           </svg>
         </div>
         <div
-          className={` bg-black  z-[0] md:bg-transparent md:flex md:pb-0 pb-12 absolute h-screen md:h-10  md:static  left-0 w-full md:w-auto md:pl-0 transition-all duration-400 ease-in ${
+          className={` bg-black pt-10  z-[0] md:bg-transparent md:flex md:pb-0 pb-12 absolute h-screen md:h-10  md:static  left-0 w-full md:w-auto md:pl-0 transition-all duration-400 ease-in ${
             open ? '' : 'left-[100%]'
           }`}
         >
-          <NavButton text={'Home'} link={'/home'} inverse={false} mobile={true} />
-          <NavButton text={'Contact'} link={'/contact'} inverse={false} mobile={true} />
-          <NavButton text={'Projects'} link={'/projects'} inverse={false} mobile={true} />
+          <NavButtonMobile
+            text={'Home'}
+            link={'home'}
+            openNav={() => {
+              console.log('open');
+              setOpen(false);
+              enableScroll();
+            }}
+          />
+
+          <NavButtonMobile
+            text={'Contact'}
+            link={'contact'}
+            openNav={() => {
+              setOpen(false);
+              enableScroll();
+            }}
+          />
+          <NavButtonMobile
+            text={'Projects'}
+            link={'projects'}
+            openNav={() => {
+              setOpen(false);
+              enableScroll();
+            }}
+          />
         </div>
       </div>
     </div>
