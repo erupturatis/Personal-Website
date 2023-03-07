@@ -23,7 +23,7 @@ const Home = ({}) => {
       <div className={`  ${windowWidth > 768 ? 'absolute right-40 top-40' : ' flex justify-center w-full mt-40  z-0 relative'} `}>
         {windowWidth !== null ? <>{windowWidth > 768 ? <Husky scale={1} scrollEyes={false} /> : <Husky scale={0.65} scrollEyes={true} />}</> : <></>}
       </div>
-      <div className=" border-2 border-green-400 w-96 h-32 absolute top-10 z-[10]"></div>
+      <div className="h-96"></div>
       <div className="h-96"></div>
       <div className="h-96"></div>
       <div className="h-96"></div>
