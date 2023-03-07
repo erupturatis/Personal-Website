@@ -4,39 +4,41 @@ import { useEffect } from 'react';
 import { huskyScript, paramsHuskyScript } from './husky_script';
 
 type HuskyProps = {
-    scale: number;
+  scale: number;
 };
 
 const Husky = ({ scale }: HuskyProps) => {
-    // standard size is 800x800
-    const baseSize = 800;
-    const width = baseSize * scale;
-    const height = baseSize * scale;
-    let params: paramsHuskyScript = {
-        leftEyeBaseX: width * 0.088,
-        leftEyeBaseY: height * 0.355,
-        rightEyeBaseX: width * 0.285,
-        rightEyeBaseY: height * 0.358,
-        leftEyeCenterOffsetX: height * 0.05,
-        leftEyeCenterOffsetY: height * 0.045,
-        rightEyeCenterOffsetX: height * 0.05,
-        rightEyeCenterOffsetY: height * 0.035,
-        scale: scale,
-        scrollEyes: true,
-        baseSize: baseSize,
-    };
-    // for desktop screens
-    let adjuster = huskyScript.bind(huskyScript)(params);
+  // standard size is 800x800
+  const [baseSize, setBaseSize] = useState(800 * scale);
 
-    return (
-        <>
-            <svg width={width} height={height}>
-                <image id="lefteye" height={height * 0.09} x={width * 0.088} y={height * 0.355} xlinkHref="/lefteye.png" />
-                <image id="righteye" height={height * 0.08} x={width * 0.285} y={height * 0.358} xlinkHref="/righteye.png" />
-                <image height={height} xlinkHref="/huskybody.png" />
-            </svg>
-        </>
-    );
+  let params: paramsHuskyScript = {
+    leftEyeBaseX: baseSize * 0.088,
+    leftEyeBaseY: baseSize * 0.355,
+    rightEyeBaseX: baseSize * 0.285,
+    rightEyeBaseY: baseSize * 0.358,
+    leftEyeCenterOffsetX: baseSize * 0.05,
+    leftEyeCenterOffsetY: baseSize * 0.045,
+    rightEyeCenterOffsetX: baseSize * 0.05,
+    rightEyeCenterOffsetY: baseSize * 0.035,
+    scale: scale,
+    scrollEyes: true,
+    baseSize: baseSize,
+  };
+  // for desktop screens
+  useEffect(() => {
+    let adjuster = huskyScript.bind(huskyScript)(params);
+    return () => {};
+  }, []);
+
+  return (
+    <>
+      <svg width={(baseSize * 2) / 3} height={baseSize}>
+        <image id="lefteye" height={baseSize * 0.09} x={baseSize * 0.088} y={baseSize * 0.355} xlinkHref="/lefteye.png" />
+        <image id="righteye" height={baseSize * 0.08} x={baseSize * 0.285} y={baseSize * 0.358} xlinkHref="/righteye.png" />
+        <image height={baseSize} xlinkHref="/huskybody.png" />
+      </svg>
+    </>
+  );
 };
 
 export default Husky;

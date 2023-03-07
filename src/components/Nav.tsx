@@ -1,40 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import NavButton from './NavButton';
 
 const Nav = () => {
-  let Links = [
-    { name: 'HOME', link: '/' },
-    { name: '', link: '/' },
-    { name: 'ABOUT', link: '/' },
-  ];
   let [open, setOpen] = useState(false);
+  let [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 768) {
+      setMobile(true);
+      console.log(mobile);
+    }
+  }, []);
+
   return (
-    <div className="shadow-md w-full fixed top-0 left-0">
-      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+    <div className=" w-full fixed top-0 left-0 h-20">
+      <div className="md:flex items-center justify-center py-4 md:px-10 px-7 h-20">
+        <div onClick={() => setOpen((open) => !open)} className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden ">
+          <svg viewBox="0 0 25 25" width="25" height="25">
+            {open ? (
+              <>
+                <path d="M3 3 L21 21" stroke="white" strokeWidth="2" />
+                <path d="M21 3 L3 21" stroke="white" strokeWidth="2" />
+              </>
+            ) : (
+              <>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0" y1="5" x2="20" y2="5" stroke="white" strokeWidth="1.5" />
+                  <line x1="0" y1="13" x2="20" y2="13" stroke="white" strokeWidth="1.5" />
+                  <line x1="0" y1="21" x2="20" y2="21" stroke="white" strokeWidth="1.5" />
+                </svg>
+              </>
+            )}
+          </svg>
+        </div>
+
         <div
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-800"
-        >
-          Designer
-        </div>
-
-        <div onClick={() => setOpen((open) => !open)} className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden">
-          click
-        </div>
-
-        <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute h-screen md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? '' : 'left-[490px]'
+          className={` bg-bgdark md:bg-transparent md:flex md:pb-0 pb-12 absolute h-screen md:h-10 top-20 md:static  md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 transition-all duration-400 ease-in ${
+            open ? '' : 'left-[100%]'
           }`}
         >
-          {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-              <a href={link.link} className="text-gray-800 hover:text-gray-400 duration-500">
-                {link.name}
-              </a>
-            </li>
-          ))}
-          <button>Get Started</button>
-        </ul>
+          <NavButton text={'Home'} link={'/home'} inverse={false} mobile={mobile} />
+          <NavButton text={'Contact'} link={'/contact'} inverse={!mobile} mobile={mobile} />
+          <NavButton text={'Projects'} link={'/projects'} inverse={false} mobile={mobile} />
+        </div>
       </div>
     </div>
   );
