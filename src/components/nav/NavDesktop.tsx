@@ -1,12 +1,13 @@
 import React from 'react';
-import NavButton from './NavButton';
+import NavButtonDesktop from './NavButtonDesktop';
+
 const NavDesktop = () => {
   return (
     <div>
-      <div className="flex justify-center items-center">
-        <NavButton inverse={false} text="Home" link="/home" mobile={false} />
-        <NavButton inverse={false} text="Contact" link="/contact" mobile={false} />
-        <NavButton inverse={false} text="Projects" link="/projects" mobile={false} />
+      <div className="flex justify-center items-center h-20 absolute top-4 z-20 w-full ">
+        <NavButtonDesktop inverse={false} text="Home" link="/home" />
+        <NavButtonDesktop inverse={true} text="Contact" link="/contact" />
+        <NavButtonDesktop inverse={false} text="Projects" link="/projects" />
       </div>
     </div>
   );

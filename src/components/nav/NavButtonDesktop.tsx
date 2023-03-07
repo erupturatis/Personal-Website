@@ -7,8 +7,8 @@ const roboto300 = Roboto({
   subsets: ['latin'],
 });
 
-const roboto400 = Roboto({
-  weight: '400',
+const roboto500 = Roboto({
+  weight: '500',
   subsets: ['latin'],
 });
 
@@ -18,10 +18,14 @@ type navButtonProps = {
   inverse: boolean;
 };
 
-const NavButtonDesktop = () => {
+const NavButtonDesktop = ({ text, link, inverse }: navButtonProps) => {
   return (
-    <div>
-      <div></div>
+    <div
+      className={` px-6 py-2 mx-8 text-lg select-none ${inverse ? roboto500.className : roboto300.className} ${
+        inverse ? ' bg-white rounded-xl text-black' : 'text-white'
+      }`}
+    >
+      <div>{text}</div>
     </div>
   );
 };
