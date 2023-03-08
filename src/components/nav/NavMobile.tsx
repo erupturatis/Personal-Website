@@ -12,26 +12,22 @@ const NavMobile = () => {
   }, []);
 
   function disableScroll() {
+    console.log('disabled');
     if (body) body.style.overflow = 'hidden';
   }
 
   function enableScroll() {
+    console.log('enabled');
     if (body) body.style.overflow = '';
   }
   return (
     <div>
       <div className="fixed w-full top-0 z-[10] ">
-        <div
-          onClick={() =>
-            setOpen((open) => {
-              if (open) {
-                disableScroll();
-              } else {
-                enableScroll();
-              }
-              return !open;
-            })
-          }
+        <button
+          onClick={() => {
+            open ? enableScroll() : disableScroll();
+            setOpen(!open);
+          }}
           className="text-3xl z-[20]  absolute right-8 top-6 cursor-pointer md:hidden "
         >
           <svg viewBox="0 0 25 25" width="25" height="25">
@@ -50,7 +46,7 @@ const NavMobile = () => {
               </>
             )}
           </svg>
-        </div>
+        </button>
         <div
           className={` bg-black pt-10  z-[0] md:bg-transparent md:flex md:pb-0 pb-12 absolute h-screen md:h-10  md:static  left-0 w-full md:w-auto md:pl-0 transition-all duration-400 ease-in ${
             open ? '' : 'left-[100%]'
