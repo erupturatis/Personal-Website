@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NavButton from './NavButton';
 import NavMobile from './NavMobile';
 import NavDesktop from './NavDesktop';
 
