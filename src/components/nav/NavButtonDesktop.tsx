@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { Roboto } from 'next/font/google';
 
+import styles from './buttons.module.css';
+
 const roboto300 = Roboto({
   weight: '300',
   subsets: ['latin'],
@@ -20,13 +22,17 @@ type navButtonProps = {
 
 const NavButtonDesktop = ({ text, link, inverse }: navButtonProps) => {
   return (
-    <div
-      className={` px-6 py-2 mx-8 text-lg select-none ${inverse ? roboto500.className : roboto300.className} ${
-        inverse ? ' bg-white rounded-xl text-black' : 'text-white'
-      }`}
-    >
-      <div>{text}</div>
-    </div>
+    <Link href={link}>
+      <div
+        className={` px-6 py-2 mx-8 text-lg first-letter:select-none  cursor-pointer transition-all ${inverse ? roboto500.className : roboto300.className} ${
+          inverse
+            ? ` bg-white rounded-xl opacity-90 ${styles.inverseButton}  ease-in-500 hover:opacity-100`
+            : 'text-white  opacity-80 hover:opacity-100 ease-in-200'
+        }`}
+      >
+        <div>{text}</div>
+      </div>
+    </Link>
   );
 };
 

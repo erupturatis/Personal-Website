@@ -28,7 +28,7 @@ const NavButtonMobile = ({ text, link, openNav }: navButtonProps) => {
         }}
       >
         <div className={`w-32 flex justify-center items-center  my-8  md:mt-4 md:mb-4 md:mr-10 md:ml-10 `}>
-          <div className={`text-white font-light text-xl bg-transparent pr-4 pl-4 pt-2 pb-2 rounded-lg `}>{text}</div>
+          <div className={`text-white  font-light text-xl bg-transparent pr-4 pl-4 pt-2 pb-2 rounded-lg `}>{text}</div>
         </div>
       </Link>
     </div>

@@ -16,6 +16,7 @@ module.exports = {
           50: '#f9fafb',
         },
       },
+      dropShadow: {},
     },
   },
   plugins: [],

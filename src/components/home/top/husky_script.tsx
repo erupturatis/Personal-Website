@@ -10,11 +10,15 @@ export type paramsHuskyScript = {
   rightEyeCenterOffsetX: number;
   rightEyeCenterOffsetY: number;
   scale: number;
+  addInterval: any; // used to clear all intervals on exiting the page
+  addEvent: any; // used to clear all event listeners on exiting the page
   scrollEyes?: boolean;
   baseSize?: number;
+  count?: number;
 };
 
-export async function huskyScript(params: paramsHuskyScript) {
+export function huskyScript(params: paramsHuskyScript) {
+  console.log('called again');
   const mouseCoordUpdate = (event: any) => {
     // get mouse position
     const mouseX = event.clientX;
@@ -24,8 +28,10 @@ export async function huskyScript(params: paramsHuskyScript) {
     this.mouseY = mouseY;
 
     if (!this.started) {
+      console.log('starting');
       this.started = true;
-      setInterval(loop, 1000 / 60);
+      let interval = setInterval(loop, 1000 / 1);
+      params.addInterval(interval);
     }
   };
 
@@ -38,6 +44,7 @@ export async function huskyScript(params: paramsHuskyScript) {
   const loop = () => {
     let rect = svg?.getBoundingClientRect();
     this.rect = rect;
+    console.log('running', this.rect, params.count);
     // calculates vector from center of eyes to mouse
     const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
     const leftEyeY = this.mouseY - (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);
@@ -88,11 +95,23 @@ export async function huskyScript(params: paramsHuskyScript) {
     this.rightEye.setAttribute('y', rightEyeNewY.toString());
   };
   if (params.scrollEyes) {
-    setInterval(scrollUpdater, 1000 / 60);
-    setInterval(loop, 1000 / 60);
+    let scrollInt = setInterval(scrollUpdater, 1000 / 60);
+    let loopInt = setInterval(loop, 1000 / 1);
+    params.addInterval(scrollInt);
+    params.addInterval(loopInt);
   } else {
-    document.addEventListener('mousemove', mouseCoordUpdate);
-    // gets reference to husky eyes
+    function addEventListenerWithReference() {
+      document.addEventListener('mousemove', mouseCoordUpdate);
+      return mouseCoordUpdate; // Return the listener function reference
+    }
+
+    let eListener = addEventListenerWithReference();
+    setTimeout(() => {
+      document.removeEventListener('mousemove', eListener);
+      console.log('removed 1 listener');
+    }, 1000);
+
+    params.addEvent(eListener);
   }
   let svg = document.querySelector('#huskySvg');
 

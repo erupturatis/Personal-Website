@@ -1,3 +1,4 @@
+import { getEventListeners } from 'events';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -11,6 +12,8 @@ type HuskyProps = {
 const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   // standard size is 800x800
   const [baseSize, setBaseSize] = useState(800 * scale);
+  const [interval, setInterval] = useState<any>([]);
+  const [eListener, setEListener] = useState<any>([]);
 
   let params: paramsHuskyScript = {
     leftEyeBaseX: baseSize * 0.088,
@@ -24,12 +27,45 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
     scale: scale,
     scrollEyes: scrollEyes,
     baseSize: baseSize,
+    addInterval: (newInterval: any) => {
+      setInterval((interval: any) => {
+        let newVec = [...interval];
+        newVec.push(newInterval);
+        return newVec;
+      });
+    },
+    addEvent: (newEvent: any) => {
+      setEListener((eListener: any) => {
+        let newVec = [...eListener];
+        newVec.push(newEvent);
+        return newVec;
+      });
+    },
   };
   // for desktop screens
   useEffect(() => {
     let adjuster = huskyScript.bind(huskyScript)(params);
-    return () => {};
   }, []);
+
+  useEffect(() => {
+    console.log(eListener);
+    return () => {
+      console.log(eListener);
+      for (let e of eListener) {
+        document.removeEventListener('mousemove', e);
+      }
+    };
+  }, [eListener]);
+
+  useEffect(() => {
+    return () => {
+      if (interval.length > 0) {
+        for (let int of interval) {
+          clearInterval(int);
+        }
+      }
+    };
+  }, [interval]);
 
   return (
     <>
