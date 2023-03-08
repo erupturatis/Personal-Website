@@ -18,7 +18,7 @@ export type paramsHuskyScript = {
 };
 
 export function huskyScript(params: paramsHuskyScript) {
-  console.log('called again');
+  this.started = false;
   const mouseCoordUpdate = (event: any) => {
     // get mouse position
     const mouseX = event.clientX;
@@ -30,7 +30,7 @@ export function huskyScript(params: paramsHuskyScript) {
     if (!this.started) {
       console.log('starting');
       this.started = true;
-      let interval = setInterval(loop, 1000 / 1);
+      let interval = setInterval(loop, 1000 / 60);
       params.addInterval(interval);
     }
   };
@@ -96,7 +96,7 @@ export function huskyScript(params: paramsHuskyScript) {
   };
   if (params.scrollEyes) {
     let scrollInt = setInterval(scrollUpdater, 1000 / 60);
-    let loopInt = setInterval(loop, 1000 / 1);
+    let loopInt = setInterval(loop, 1000 / 60);
     params.addInterval(scrollInt);
     params.addInterval(loopInt);
   } else {
@@ -106,11 +106,6 @@ export function huskyScript(params: paramsHuskyScript) {
     }
 
     let eListener = addEventListenerWithReference();
-    setTimeout(() => {
-      document.removeEventListener('mousemove', eListener);
-      console.log('removed 1 listener');
-    }, 1000);
-
     params.addEvent(eListener);
   }
   let svg = document.querySelector('#huskySvg');
