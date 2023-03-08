@@ -17,6 +17,11 @@ module.exports = {
         },
       },
       dropShadow: {},
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)'],
+        questrial: ['var(--font-questrial)'],
+        roboto: ['var(--font-roboto)'],
+      },
     },
   },
   plugins: [],
