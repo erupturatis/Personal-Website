@@ -23,12 +23,10 @@ export function huskyScript(params: paramsHuskyScript) {
     // get mouse position
     const mouseX = event.clientX;
     const mouseY = event.clientY;
-    // console.log(mouseX, mouseY);
     this.mouseX = mouseX;
     this.mouseY = mouseY;
 
     if (!this.started) {
-      console.log('starting');
       this.started = true;
       let interval = setInterval(loop, 1000 / 60);
       params.addInterval(interval);
@@ -44,7 +42,6 @@ export function huskyScript(params: paramsHuskyScript) {
   const loop = () => {
     let rect = svg?.getBoundingClientRect();
     this.rect = rect;
-    console.log('running', this.rect, params.count);
     // calculates vector from center of eyes to mouse
     const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
     const leftEyeY = this.mouseY - (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);

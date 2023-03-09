@@ -48,9 +48,11 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   }, []);
 
   useEffect(() => {
-    console.log(eListener);
+    return () => {};
+  }, [scale]);
+
+  useEffect(() => {
     return () => {
-      console.log(eListener);
       for (let e of eListener) {
         document.removeEventListener('mousemove', e);
       }
