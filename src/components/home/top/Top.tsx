@@ -47,7 +47,35 @@ const Top = () => {
   }, []);
 
   useEffect(() => {
-    // document.body.style.overflowX = 'hidden';
+    // adds event listener for scroll
+
+    // keeping values of elements with ids huskyScrollTop and huskyScrollBottom
+    const huskyScrollTop = document.getElementById('huskyScrollTop');
+    const huskyScrollBottom = document.getElementById('huskyScrollBottom');
+    let huskyScrollTopY: number;
+    let huskyScrollBottomY: number;
+
+    if (huskyScrollTop && huskyScrollBottom) {
+      console.log('got gere');
+      const huskyScrollTopRect = huskyScrollTop.getBoundingClientRect();
+      huskyScrollTopY = huskyScrollTopRect?.y + window.scrollY;
+      const huskyScrollBottomRect = huskyScrollBottom.getBoundingClientRect();
+      huskyScrollBottomY = huskyScrollBottomRect?.y + window.scrollY;
+    }
+
+    const handleScroll = (topY: number, bottomY: number, lineID: string) => {
+      const scroll = window.scrollY + (window.innerHeight * 1) / 2;
+      // getting element with id huskyScrollTop absolute coordinates
+      const line = document.getElementById(lineID);
+      console.log(line, lineID);
+      if (line && scroll > topY && scroll < bottomY) {
+        line.style.strokeDashoffset = `${(100 - ((scroll - topY) / (bottomY - topY)) * 100) * 2}%`;
+        console.log(line.style.strokeDashoffset);
+      }
+    };
+    window.addEventListener('scroll', () => {
+      handleScroll(huskyScrollTopY, huskyScrollBottomY, 'huskyLine');
+    });
 
     return () => {};
   }, []);
@@ -80,12 +108,31 @@ const Top = () => {
               Eugen
             </div>
           </div>
-          <div className=" flex justify-center w-full ">
+          <div className=" flex relative justify-center w-full ">
             <div className={`${questrial.className}  w-5/6  text-center opacity-90 mt-6 text-sm md:text-lg  `}>
               I am a passionate developer from europe who is always exploring new technologies and pushing the limits of what's possible
             </div>
+            <div id={'huskyScrollTop'} className="absolute top-0"></div>
           </div>
         </div>
+      </div>
+
+      <div className=" pl-50% h-[1000px] border-2 border-white">
+        <svg width="500" height="1100" viewBox="0 0 600 1098" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="huskyLine"
+            d="M1 0C1 196 122.35 452.332 226.214 545.5C441.147 738.3 496.293 993.5 497 1097"
+            strokeDasharray={'200%'}
+            strokeDashoffset={'0%'}
+            stroke="url(#paint0_linear_96_9)"
+          />
+          <defs>
+            <linearGradient id="paint0_linear_96_9" x1="249" y1="0" x2="249" y2="1097" gradientUnits="userSpaceOnUse">
+              <stop stop-color="white" stop-opacity="0" />
+              <stop offset="0.546875" stop-color="white" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
 
       {windowWidth !== null ? (
@@ -101,7 +148,6 @@ const Top = () => {
       ) : (
         <></>
       )}
-      <div className="h-96"></div>
     </div>
   );
 };

@@ -15,3 +15,15 @@ svg {
   position: relative;
   z-index: -1;
 }
+
+#line {
+  stroke-dasharray: 200%;
+  stroke-dashoffset: 200%;
+  animation: draw 2s ease-in-out forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
