@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Husky from './Husky';
 import styles from './top.module.css';
-
+import Canvas from './Canvas';
 type windowWidth = null | number;
 
 import { Montserrat, Questrial, Roboto } from 'next/font/google';
@@ -46,40 +46,6 @@ const Top = () => {
     });
   }, []);
 
-  useEffect(() => {
-    // adds event listener for scroll
-
-    // keeping values of elements with ids huskyScrollTop and huskyScrollBottom
-    const huskyScrollTop = document.getElementById('huskyScrollTop');
-    const huskyScrollBottom = document.getElementById('huskyScrollBottom');
-    let huskyScrollTopY: number;
-    let huskyScrollBottomY: number;
-
-    if (huskyScrollTop && huskyScrollBottom) {
-      console.log('got gere');
-      const huskyScrollTopRect = huskyScrollTop.getBoundingClientRect();
-      huskyScrollTopY = huskyScrollTopRect?.y + window.scrollY;
-      const huskyScrollBottomRect = huskyScrollBottom.getBoundingClientRect();
-      huskyScrollBottomY = huskyScrollBottomRect?.y + window.scrollY;
-    }
-
-    const handleScroll = (topY: number, bottomY: number, lineID: string) => {
-      const scroll = window.scrollY + (window.innerHeight * 1) / 2;
-      // getting element with id huskyScrollTop absolute coordinates
-      const line = document.getElementById(lineID);
-      console.log(line, lineID);
-      if (line && scroll > topY && scroll < bottomY) {
-        line.style.strokeDashoffset = `${(100 - ((scroll - topY) / (bottomY - topY)) * 100) * 2}%`;
-        console.log(line.style.strokeDashoffset);
-      }
-    };
-    window.addEventListener('scroll', () => {
-      handleScroll(huskyScrollTopY, huskyScrollBottomY, 'huskyLine');
-    });
-
-    return () => {};
-  }, []);
-
   return (
     <div>
       <div className={` w-full flex justify-center xl:mt-64  xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}>
@@ -117,22 +83,38 @@ const Top = () => {
         </div>
       </div>
 
-      <div className=" pl-50% h-[1000px] border-2 border-white">
-        <svg width="500" height="1100" viewBox="0 0 600 1098" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            id="huskyLine"
-            d="M1 0C1 196 122.35 452.332 226.214 545.5C441.147 738.3 496.293 993.5 497 1097"
-            strokeDasharray={'200%'}
-            strokeDashoffset={'0%'}
-            stroke="url(#paint0_linear_96_9)"
+      {/* <div className=" pl-[450px] relative 2xl:pl-[600px] h-[800px] ">
+        {windowWidth && (
+          <svg className="absolute" width={`${(575 * windowWidth) / 1920}`} height="800" viewBox="0 0 800 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              id="huskyLine"
+              d={` M1 0C1 196 122.35 452.332 226.214 545.5C441.147 738.3 ${(496.2 * windowWidth) / 1920} 993.5 ${(497 * windowWidth) / 1920} 1097 `}
+              strokeDasharray={'200%'}
+              strokeDashoffset={'200%'}
+              stroke="url(#paint0_linear_96_9)"
+            />
+            <defs>
+              <linearGradient id="paint0_linear_96_9" x1="249" y1="0" x2="249" y2="1097" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white" stop-opacity="0" />
+                <stop offset="0.546875" stop-color="white" />
+              </linearGradient>
+            </defs>
+          </svg>
+        )}
+      </div> */}
+
+      <div className="w-full h-[800px]">
+        {windowWidth && (
+          <Canvas
+            x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
+            y1={0}
+            x2={windowWidth / 2}
+            y2={800}
+            widthP={windowWidth}
+            heightP={800}
+            accent={windowWidth > 1280 ? windowWidth / 10 : 0}
           />
-          <defs>
-            <linearGradient id="paint0_linear_96_9" x1="249" y1="0" x2="249" y2="1097" gradientUnits="userSpaceOnUse">
-              <stop stop-color="white" stop-opacity="0" />
-              <stop offset="0.546875" stop-color="white" />
-            </linearGradient>
-          </defs>
-        </svg>
+        )}
       </div>
 
       {windowWidth !== null ? (
