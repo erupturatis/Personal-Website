@@ -30,6 +30,7 @@ const Top = () => {
   const [windowWidth, setWindowWidth] = useState<windowWidth>(null);
   const [word, setWord] = useState(true);
 
+  let doc: HTMLElement | null = null;
   useEffect(() => {
     // starts timeout that changes the word
     setTimeout(() => {
@@ -39,10 +40,12 @@ const Top = () => {
         setWord((word) => !word);
       }, 4000);
     }, 1000);
-
+    doc = document.querySelector('html');
     setWindowWidth(window.innerWidth);
     window.addEventListener('resize', () => {
-      setWindowWidth(window.innerWidth);
+      // setWindowWidth(window.innerWidth);
+      if (!doc) return;
+      setWindowWidth(doc.getBoundingClientRect().width);
     });
   }, []);
 
@@ -104,7 +107,7 @@ const Top = () => {
       </div> */}
 
       <div className="w-full h-[800px]">
-        {windowWidth && (
+        {windowWidth !== null && (
           <Canvas
             x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
             y1={0}

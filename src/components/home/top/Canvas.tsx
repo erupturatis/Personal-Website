@@ -13,7 +13,7 @@ type CanvasProps = {
 
 const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
   const [width, setWidth] = useState(widthP);
-
+  console.log('canvase rendered', widthP);
   const stop = useRef(false);
   const currentWidth = useRef(widthP);
 
@@ -90,12 +90,13 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
     refX2.current = x2;
     refY2.current = y2;
     refAccent.current = accent;
+    console.log(widthP);
   }, [widthP]);
 
   console.log('reredender');
   return (
     <div>
-      <canvas id="lineCanvas" width={width} height={heightP} className="relative z-[-40]" />
+      <canvas id="lineCanvas" width={widthP} height={heightP} className="relative z-[-40]" />
     </div>
   );
 };
