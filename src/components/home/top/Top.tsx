@@ -41,7 +41,9 @@ const Top = () => {
       }, 4000);
     }, 1000);
     doc = document.querySelector('html');
-    setWindowWidth(window.innerWidth);
+    if (doc) {
+      setWindowWidth(doc.getBoundingClientRect().width);
+    }
     window.addEventListener('resize', () => {
       // setWindowWidth(window.innerWidth);
       if (!doc) return;
@@ -106,20 +108,6 @@ const Top = () => {
         )}
       </div> */}
 
-      <div className="w-full h-[800px]">
-        {windowWidth !== null && (
-          <Canvas
-            x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
-            y1={0}
-            x2={windowWidth / 2}
-            y2={800}
-            widthP={windowWidth}
-            heightP={800}
-            accent={windowWidth > 1280 ? windowWidth / 10 : 0}
-          />
-        )}
-      </div>
-
       {windowWidth !== null ? (
         <>
           <div className={`  ${windowWidth > 1280 ? 'absolute 2x:right-40 xl:right-20  top-40' : ' flex  justify-center w-full   z-0 relative'} `}>
@@ -133,6 +121,19 @@ const Top = () => {
       ) : (
         <></>
       )}
+      <div className="w-full h-[800px]">
+        {windowWidth !== null && (
+          <Canvas
+            x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
+            y1={0}
+            x2={windowWidth / 2}
+            y2={800}
+            widthP={windowWidth}
+            heightP={800}
+            accent={windowWidth > 1280 ? windowWidth / 10 : 0}
+          />
+        )}
+      </div>
     </div>
   );
 };

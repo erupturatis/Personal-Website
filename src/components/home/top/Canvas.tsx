@@ -90,6 +90,7 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
     refX2.current = x2;
     refY2.current = y2;
     refAccent.current = accent;
+    setWidth(widthP);
     console.log(widthP);
   }, [widthP]);
 
