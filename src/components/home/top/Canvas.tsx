@@ -13,7 +13,6 @@ type CanvasProps = {
 
 const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
   const [width, setWidth] = useState(widthP);
-  console.log('canvase rendered', widthP);
   const stop = useRef(false);
   const currentWidth = useRef(widthP);
 
@@ -37,17 +36,13 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
     // gets coordinates of huskyScrollTop and huskyScrollBottom elements
     const huskyScrollTop = document.getElementById('huskyScrollTop');
     const huskyScrollBottom = document.querySelector('#huskyScrollBottom');
-    console.log(huskyScrollBottom);
     let topY = 0;
     let bottomY = 0;
 
     if (huskyScrollTop && huskyScrollBottom) {
-      console.log(huskyScrollTop.getBoundingClientRect());
-      console.log(huskyScrollBottom.getBoundingClientRect());
       topY = huskyScrollTop.getBoundingClientRect().top + window.scrollY;
       bottomY = huskyScrollBottom.getBoundingClientRect().top + window.scrollY;
     }
-    console.log(topY, bottomY);
     window.addEventListener('scroll', () => {
       handleScroll(topY, bottomY);
     });
@@ -62,7 +57,6 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
     // ctx.strokeStyle = 'white';
     // function to draw line from x1, y1 to x2, y2
     const drawLine = (x1: number, y1: number, x2: number, y2: number, accent: number) => {
-      // console.log('drawn');
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.quadraticCurveTo((x2 + x1) / 2 - accent, (y2 + y1) / 2 - accent, (x2 + x1) / 2, (y2 + y1) / 2);
@@ -91,10 +85,8 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent }: CanvasProps) => {
     refY2.current = y2;
     refAccent.current = accent;
     setWidth(widthP);
-    console.log(widthP);
   }, [widthP]);
 
-  console.log('reredender');
   return (
     <div>
       <canvas id="lineCanvas" width={widthP} height={heightP} className="relative z-[-40]" />

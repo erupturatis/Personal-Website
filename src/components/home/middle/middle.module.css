@@ -1,0 +1,6 @@
+.nameGradient {
+  background: #00ffd8;
+  background: linear-gradient(180deg, rgba(122, 122, 122, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
