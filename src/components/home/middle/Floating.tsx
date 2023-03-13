@@ -52,7 +52,7 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
       div.style.width = `${distanceCoefficient}px`;
       div.style.height = `${distanceCoefficient}px`;
       div.style.borderRadius = `25%`;
-      div.style.marginTop = `${Math.random() * (height - baseSize)}px`;
+      div.style.marginTop = `${Math.random() * (height - baseSize) + baseSize / 3}px`;
       let animationDuration = (1 / (distanceCoefficient / baseSize)) * baseAnimationSpeed; // we divide by 10 to run the animation faster
       div.style.zIndex = `${distanceCoefficient}`;
       div.style.backgroundImage = `url('${url}')`;
@@ -100,14 +100,12 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
 
   const containerHeight = useRef(heightState);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   return (
-    <div className="flex w-full justify-center">
-      <div className={` FloatingHolder h-[${containerHeight.current}px] relative w-[${width}px]  mb-32 ${styles.mask}`}></div>;
-    </div>
+    <>
+      <div className="flex w-full justify-center">
+        <div className={` FloatingHolder h-[${containerHeight.current}px] relative w-[${width}px]  mb-32 ${styles.mask}`}></div>;
+      </div>
+    </>
   );
 };
 
