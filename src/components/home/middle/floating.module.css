@@ -1,25 +1,19 @@
 .morphism {
-  background: #23282b;
+  /* background: rgb(35, 40, 43); */
   border-top: 1px solid #ffffff70;
   box-shadow: inset 0px -4px 2px rgba(0, 0, 0, 0.47);
   border-radius: 28px;
+  opacity: 1;
   /* animation: move-block 5s linear infinite; */
 }
 
-@keyframes move-block {
-  0% {
-    transform: translateX();
-  }
-  100% {
-    transform: translateX(0vw);
-  }
+.fade {
+  /* background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 50%, rgba(0, 0, 0, 1) 100%); */
+}
+.mask {
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 33%, rgba(255, 255, 255, 1) 66%, rgba(0, 0, 0, 0) 100%);
 }
 
-@keyframes move-block-loop {
-  0% {
-    transform: translateX(100vw);
-  }
-  100% {
-    transform: translateX(0vw);
-  }
+.test {
+  background-color: aqua;
 }
