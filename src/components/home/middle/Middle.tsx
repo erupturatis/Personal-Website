@@ -13,7 +13,6 @@ const Middle = () => {
         <div className="w-full text-center text-white text-md md:text-2xl opacity-20 font-light md:mt-4">But are not limited to</div>
       </div>
       <Floating height={400} width={1000} baseSize={100} />
-      <div className="h-96"></div>
     </div>
   );
 };

@@ -38,7 +38,12 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
 
   useEffect(() => {
     // generating numDivs divs
-    const sWidth = document.querySelector('.FloatingHolder')?.clientWidth;
+    const holder: HTMLDivElement | null = document.querySelector('.FloatingHolder');
+    if (holder) {
+      holder.style.height = `${height}px`;
+      holder.style.width = `${width}px`;
+    }
+    const sWidth = holder?.clientWidth;
     function generateDiv(baseSize: number, url: string) {
       const baseAnimationSpeed = 5000;
 
@@ -52,13 +57,12 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
       div.style.width = `${distanceCoefficient}px`;
       div.style.height = `${distanceCoefficient}px`;
       div.style.borderRadius = `25%`;
-      div.style.marginTop = `${Math.random() * (height - baseSize) + baseSize / 3}px`;
-      let animationDuration = (1 / (distanceCoefficient / baseSize)) * baseAnimationSpeed; // we divide by 10 to run the animation faster
+      div.style.marginTop = `${Math.random() * (height - (baseSize * 4) / 3) + baseSize / 3}px`;
+      let animationDuration = (1 / (distanceCoefficient / baseSize)) * baseAnimationSpeed;
       div.style.zIndex = `${distanceCoefficient}`;
       div.style.backgroundImage = `url('${url}')`;
       div.style.backgroundRepeat = 'no-repeat';
       div.style.backgroundSize = 'cover';
-      // div.style.backgroundColor = `rgba(35,40,43,${distanceCoefficient / baseSize})`;
       let initialX;
       if (sWidth) {
         initialX = Math.random() * sWidth;
@@ -71,7 +75,6 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
           easing: 'linear',
           loop: false,
           complete: () => {
-            console.log('completed loop');
             // runs the main animation loop from 0 to Swidth
             anime({
               targets: div,
@@ -103,7 +106,7 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className={` FloatingHolder h-[${containerHeight.current}px] relative w-[${width}px]  mb-32 ${styles.mask}`}></div>;
+        <div className={` FloatingHolder  relative mb-32 ${styles.mask}`}></div>;
       </div>
     </>
   );
