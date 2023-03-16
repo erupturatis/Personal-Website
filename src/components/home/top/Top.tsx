@@ -95,9 +95,7 @@ const Top = () => {
             ) : (
               <div>
                 <Husky scale={windowWidth < 500 ? windowWidth / 800 : windowWidth / 1280} scrollEyes={true} />
-                <div className="relative">
-                  <div id={'huskyScrollTop'} className="absolute top-0"></div>
-                </div>
+                <div className="relative">{/* <div id={'huskyScrollTop'} className="absolute top-0"></div> */}</div>
               </div>
             )}
           </div>
@@ -115,6 +113,8 @@ const Top = () => {
             widthP={windowWidth}
             heightP={800}
             accent={windowWidth > 1280 ? windowWidth / 10 : 0}
+            idTop={'huskyScrollTop'}
+            idBottom={'huskyScrollBottom'}
           />
         )}
       </div>
