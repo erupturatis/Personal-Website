@@ -165,6 +165,7 @@ const WebDev = ({ widthP, heightP }: Props) => {
 
   return (
     <div className="w-[500px] h-[500px] relative">
+      <div className="opacity-50  text-center text-xl">Hover me</div>
       <div className="absolute md:top-[-250px] md:left-[-250px]">
         <canvas id="canvasWeb" width={500} height={500} />
       </div>

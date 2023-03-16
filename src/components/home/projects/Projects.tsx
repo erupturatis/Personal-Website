@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Canvas from '../top/Canvas';
 import WebDev from './WebDev';
 import ProjectSection from './ProjectSection';
+import MachineLearning from './MachineLearning';
 
 const Projects = () => {
   const [windowWidth, setWindowWidth] = useState<any>(null);
@@ -57,7 +58,37 @@ const Projects = () => {
                 />
               </div>
 
-              <ProjectSection children={<WebDev widthP={1000} heightP={1000} />} />
+              <ProjectSection width={500} height={500} text={'Web Development'} children={<WebDev widthP={1000} heightP={1000} />} />
+
+              <div className="relative">
+                <Canvas
+                  x1={windowWidth / 2}
+                  y1={0}
+                  x2={windowWidth / 2}
+                  y2={800}
+                  widthP={windowWidth}
+                  heightP={800}
+                  accent={0}
+                  idTop={'middleTop'}
+                  idBottom={'middleBottom'}
+                  offset={-200}
+                />
+              </div>
+              <ProjectSection width={800} height={500} text={'Deep Learning'} children={<MachineLearning />} />
+              <div className="relative">
+                <Canvas
+                  x1={windowWidth / 2}
+                  y1={0}
+                  x2={windowWidth / 2}
+                  y2={800}
+                  widthP={windowWidth}
+                  heightP={800}
+                  accent={0}
+                  idTop={'middleTop'}
+                  idBottom={'middleBottom'}
+                  offset={-200}
+                />
+              </div>
             </>
           ) : (
             <></>

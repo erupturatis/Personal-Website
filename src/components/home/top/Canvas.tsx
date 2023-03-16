@@ -10,12 +10,10 @@ type CanvasProps = {
   widthP: number;
   heightP: number;
   accent: number;
-  idTop: string;
-  idBottom: string;
   offset?: number;
 };
 
-const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, idTop, idBottom, offset }: CanvasProps) => {
+const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps) => {
   const [width, setWidth] = useState(widthP);
   const stop = useRef(false);
   const currentWidth = useRef(widthP);
@@ -24,6 +22,11 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, idTop, idBottom, offs
   const refY1 = useRef(y1);
   const refX2 = useRef(x2);
   const refY2 = useRef(y2);
+
+  const refDivTop = useRef<HTMLDivElement>(null);
+  const refDivBottom = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const refAccent = useRef(accent);
 
   const clipLine = useRef(0);
@@ -38,8 +41,8 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, idTop, idBottom, offs
       }
     };
     // gets coordinates of huskyScrollTop and huskyScrollBottom elements
-    const huskyScrollTop = document.getElementById(idTop);
-    const huskyScrollBottom = document.getElementById(idBottom);
+    const huskyScrollTop = refDivTop.current;
+    const huskyScrollBottom = refDivBottom.current;
     let topY = 0;
     let bottomY = 0;
 
@@ -59,7 +62,7 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, idTop, idBottom, offs
 
   useEffect(() => {
     // creates a line from the element with id huskyScrollTop to the element with id huskyScrollBottom
-    const lineCanvas = document.getElementById(`lineCanvas${idTop}${idBottom}`) as HTMLCanvasElement;
+    const lineCanvas = canvasRef.current as HTMLCanvasElement;
     const ctx = lineCanvas.getContext('2d');
     if (!ctx) return;
     // function to draw line from x1, y1 to x2, y2
@@ -101,9 +104,9 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, idTop, idBottom, offs
 
   return (
     <div>
-      <div id={idTop} />
-      <canvas id={`lineCanvas${idTop}${idBottom}`} width={widthP} height={heightP} className="relative z-[-40]" />
-      <div id={idBottom} />
+      <div ref={refDivTop} />
+      <canvas ref={canvasRef} width={widthP} height={heightP} className="relative z-[-40]" />
+      <div ref={refDivBottom} />
     </div>
   );
 };
