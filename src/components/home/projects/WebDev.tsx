@@ -113,10 +113,16 @@ class Effect {
     };
   }
 }
-
-const WebDev = () => {
+type Props = {
+  widthP: number;
+  heightP: number;
+};
+const WebDev = ({ widthP, heightP }: Props) => {
   useEffect(() => {
     const canvas = document.getElementById('canvasWeb');
+    canvas.width = widthP;
+    canvas.height = heightP;
+
     const ctx = canvas.getContext('2d');
     const image = new Image();
     image.src = '/lefteye.png';
@@ -158,8 +164,10 @@ const WebDev = () => {
   }, []);
 
   return (
-    <div>
-      <canvas id="canvasWeb" width="500" height="500" />
+    <div className="w-[500px] h-[500px] relative">
+      <div className="absolute md:top-[-250px] md:left-[-250px]">
+        <canvas id="canvasWeb" width={500} height={500} />
+      </div>
     </div>
   );
 };

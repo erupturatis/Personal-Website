@@ -42,14 +42,14 @@ const Projects = () => {
         <>
           {windowWidth > 1280 ? (
             <>
-              <div className="absolute">
+              <div className="relative">
                 <Canvas
                   x1={windowWidth / 2}
                   y1={0}
                   x2={windowWidth / 2}
-                  y2={1600}
+                  y2={800}
                   widthP={windowWidth}
-                  heightP={1600}
+                  heightP={800}
                   accent={0}
                   idTop={'middleTop'}
                   idBottom={'middleBottom'}
@@ -57,7 +57,7 @@ const Projects = () => {
                 />
               </div>
 
-              <ProjectSection children={<WebDev />} />
+              <ProjectSection children={<WebDev widthP={1000} heightP={1000} />} />
             </>
           ) : (
             <></>
