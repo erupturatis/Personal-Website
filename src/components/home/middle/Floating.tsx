@@ -48,9 +48,6 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
       const baseAnimationSpeed = 5000;
 
       const div = document.createElement('div');
-      const img = document.createElement('img');
-      // img.src = '/floatingLogos/cpp.png';
-      // div.appendChild(img);
       let distanceCoefficient = (Math.random() * 0.5 + 0.5) * baseSize;
       distanceCoefficient = Math.floor(distanceCoefficient);
       div.className = `${styles.morphism} absolute  md:w-[${distanceCoefficient}px] md:h-[${distanceCoefficient}px] toAnim`;

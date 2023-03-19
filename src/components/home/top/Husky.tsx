@@ -1,4 +1,5 @@
 import { getEventListeners } from 'events';
+import Image from 'next/image';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -72,9 +73,9 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   return (
     <>
       <svg id="huskySvg" width={(baseSize * 2) / 3} height={baseSize}>
-        <image id="lefteye" height={baseSize * 0.09} x={baseSize * 0.088} y={baseSize * 0.355} xlinkHref="/lefteye.png" />
-        <image id="righteye" height={baseSize * 0.08} x={baseSize * 0.285} y={baseSize * 0.358} xlinkHref="/righteye.png" />
-        <image height={baseSize} xlinkHref="/huskybody.png" />
+        <image id="lefteye" height={baseSize * 0.09} x={baseSize * 0.088} y={baseSize * 0.355} xlinkHref="/lefteye.webp" />
+        <image id="righteye" height={baseSize * 0.08} x={baseSize * 0.285} y={baseSize * 0.358} xlinkHref="/righteye.webp" />
+        <image height={baseSize} xlinkHref="/minihusky.webp" />
       </svg>
     </>
   );
