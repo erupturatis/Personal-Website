@@ -113,8 +113,6 @@ const Top = () => {
             widthP={windowWidth}
             heightP={800}
             accent={windowWidth > 1280 ? windowWidth / 10 : 0}
-            idTop={'huskyScrollTop'}
-            idBottom={'huskyScrollBottom'}
           />
         )}
       </div>
