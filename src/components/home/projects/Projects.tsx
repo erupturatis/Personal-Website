@@ -44,50 +44,17 @@ const Projects = () => {
           {windowWidth > 1280 ? (
             <>
               <div className="relative">
-                <Canvas
-                  x1={windowWidth / 2}
-                  y1={0}
-                  x2={windowWidth / 2}
-                  y2={800}
-                  widthP={windowWidth}
-                  heightP={800}
-                  accent={0}
-                  idTop={'middleTop'}
-                  idBottom={'middleBottom'}
-                  offset={-200}
-                />
+                <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
 
               <ProjectSection width={500} height={500} text={'Web Development'} children={<WebDev widthP={1000} heightP={1000} />} />
 
               <div className="relative">
-                <Canvas
-                  x1={windowWidth / 2}
-                  y1={0}
-                  x2={windowWidth / 2}
-                  y2={800}
-                  widthP={windowWidth}
-                  heightP={800}
-                  accent={0}
-                  idTop={'middleTop'}
-                  idBottom={'middleBottom'}
-                  offset={-200}
-                />
+                <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
               <ProjectSection width={800} height={500} text={'Deep Learning'} children={<MachineLearning />} />
               <div className="relative">
-                <Canvas
-                  x1={windowWidth / 2}
-                  y1={0}
-                  x2={windowWidth / 2}
-                  y2={800}
-                  widthP={windowWidth}
-                  heightP={800}
-                  accent={0}
-                  idTop={'middleTop'}
-                  idBottom={'middleBottom'}
-                  offset={-200}
-                />
+                <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
             </>
           ) : (
