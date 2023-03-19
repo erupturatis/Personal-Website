@@ -16,7 +16,11 @@ type CanvasProps = {
 const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps) => {
   const [width, setWidth] = useState(widthP);
   const stop = useRef(false);
+  const wrapper = useRef<HTMLDivElement>(null);
   const currentWidth = useRef(widthP);
+
+  const [animId, setAnimId] = useState<number>(0);
+  const [listener, setListener] = useState<EventListener | null>(null);
 
   const refX1 = useRef(x1);
   const refY1 = useRef(y1);
@@ -31,8 +35,12 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
 
   const clipLine = useRef(0);
 
-  useEffect(() => {
-    // adds event listener for scroll
+  function addEventListenerRef(event: string, cb: () => void) {
+    window.addEventListener(event, cb);
+    return cb;
+  }
+
+  function scrollCalculator() {
     const handleScroll = (topY: number, bottomY: number) => {
       const scroll = window.scrollY + (window.innerHeight * 1) / 2;
       // getting element with id huskyScrollTop absolute coordinates
@@ -54,17 +62,18 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
       topY = huskyScrollTop.getBoundingClientRect().top + window.scrollY + offset;
       bottomY = huskyScrollBottom.getBoundingClientRect().top + window.scrollY + offset;
     }
-    window.addEventListener('scroll', () => {
+    // adds event listener for scroll
+    let cb = addEventListenerRef('scroll', () => {
       handleScroll(topY, bottomY);
     });
-    return () => {};
-  }, []);
+    setListener(cb);
+  }
 
-  useEffect(() => {
+  function startAnimation() {
     // creates a line from the element with id huskyScrollTop to the element with id huskyScrollBottom
     const lineCanvas = canvasRef.current as HTMLCanvasElement;
     const ctx = lineCanvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) return 0;
     // function to draw line from x1, y1 to x2, y2
     const drawLine = (x1: number, y1: number, x2: number, y2: number, accent: number) => {
       ctx.beginPath();
@@ -89,7 +98,38 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
       requestAnimationFrame(redraw);
     };
 
-    requestAnimationFrame(redraw);
+    let id = requestAnimationFrame(redraw);
+    setAnimId(id);
+  }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Run your async JavaScript code here
+          // console.log('mounted component');
+          scrollCalculator();
+          startAnimation();
+        } else {
+          if (listener) window.removeEventListener('scroll', listener);
+          // stops animation
+          cancelAnimationFrame(animId);
+          // console.log('unmounted component');
+        }
+      });
+    });
+    if (wrapper.current) observer.observe(wrapper.current);
+    else throw new Error('wrapper.current is null');
+
+    return () => {
+      if (wrapper.current) observer.unobserve(wrapper.current);
+      else throw new Error('wrapper.current is null');
+      // removes event listener for scroll
+      if (listener) window.removeEventListener('scroll', listener);
+      // stops animation
+      cancelAnimationFrame(animId);
+      console.log('unmounted component');
+    };
   }, []);
 
   useEffect(() => {
@@ -99,11 +139,10 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
     refX2.current = x2;
     refY2.current = y2;
     refAccent.current = accent;
-    setWidth(widthP);
   }, [widthP]);
 
   return (
-    <div>
+    <div ref={wrapper}>
       <div ref={refDivTop} />
       <canvas ref={canvasRef} width={widthP} height={heightP} className="relative z-[-40]" />
       <div ref={refDivBottom} />

@@ -92,9 +92,8 @@ export function huskyScript(params: paramsHuskyScript) {
     this.rightEye.setAttribute('y', rightEyeNewY.toString());
   };
   if (params.scrollEyes) {
-    let scrollInt = setInterval(scrollUpdater, 1000 / 60);
-    let loopInt = setInterval(loop, 1000 / 60);
-    params.addInterval(scrollInt);
+    document.addEventListener('scroll', scrollUpdater);
+    let loopInt = requestAnimationFrame(loop);
     params.addInterval(loopInt);
   } else {
     function addEventListenerWithReference() {
