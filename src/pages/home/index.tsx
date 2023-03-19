@@ -6,7 +6,7 @@ import Projects from '@/components/home/projects/Projects';
 const Home = ({}) => {
   return (
     <>
-      <Top />
+      {/* <Top /> */}
       {/* <Middle /> */}
       {/* <Projects /> */}
     </>
