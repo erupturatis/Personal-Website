@@ -107,14 +107,12 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           // Run your async JavaScript code here
-          // console.log('mounted component');
           scrollCalculator();
           startAnimation();
         } else {
           if (listener) window.removeEventListener('scroll', listener);
           // stops animation
           cancelAnimationFrame(animId);
-          // console.log('unmounted component');
         }
       });
     });

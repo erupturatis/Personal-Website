@@ -45,7 +45,7 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   };
   // for desktop screens
   useEffect(() => {
-    let adjuster = huskyScript.bind(huskyScript)(params);
+    // let adjuster = huskyScript.bind(huskyScript)(params);
   }, []);
 
   useEffect(() => {
