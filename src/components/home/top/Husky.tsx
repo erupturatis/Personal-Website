@@ -13,7 +13,7 @@ type HuskyProps = {
 const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   // standard size is 800x800
   const [baseSize, setBaseSize] = useState(800 * scale);
-  const [interval, setInterval] = useState<any>([]);
+  const [anims, setAnims] = useState<any>([]);
   const [eListener, setEListener] = useState<any>([]);
 
   let params: paramsHuskyScript = {
@@ -29,7 +29,7 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
     scrollEyes: scrollEyes,
     baseSize: baseSize,
     addInterval: (newInterval: any) => {
-      setInterval((interval: any) => {
+      setAnims((interval: any) => {
         let newVec = [...interval];
         newVec.push(newInterval);
         return newVec;
@@ -45,7 +45,7 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
   };
   // for desktop screens
   useEffect(() => {
-    // let adjuster = huskyScript.bind(huskyScript)(params);
+    let adjuster = huskyScript.bind(() => {})(params);
   }, []);
 
   useEffect(() => {
@@ -62,13 +62,13 @@ const Husky = ({ scale, scrollEyes }: HuskyProps) => {
 
   useEffect(() => {
     return () => {
-      if (interval.length > 0) {
-        for (let int of interval) {
-          clearInterval(int);
+      if (anims.length > 0) {
+        for (let int of anims) {
+          cancelAnimationFrame(int);
         }
       }
     };
-  }, [interval]);
+  }, [anims]);
 
   return (
     <>

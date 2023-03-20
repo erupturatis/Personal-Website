@@ -25,10 +25,9 @@ export function huskyScript(params: paramsHuskyScript) {
     const mouseY = event.clientY;
     this.mouseX = mouseX;
     this.mouseY = mouseY;
-
     if (!this.started) {
       this.started = true;
-      let interval = setInterval(loop, 1000 / 60);
+      let interval = requestAnimationFrame(loop);
       params.addInterval(interval);
     }
   };
@@ -55,7 +54,7 @@ export function huskyScript(params: paramsHuskyScript) {
     // calculates new eye position
     let radiusLeft: number = 5 * params.scale;
     let radiusRight: number = 10 * params.scale;
-    let movementSmoothing: number = 0.1;
+    let movementSmoothing: number = 0.04;
 
     // calculates all displacements
     let leftEyeDisplacementX: number = Math.cos(leftEyeAngle) * radiusLeft;
@@ -90,6 +89,8 @@ export function huskyScript(params: paramsHuskyScript) {
     this.leftEye.setAttribute('y', leftEyeNewY.toString());
     this.rightEye.setAttribute('x', rightEyeNewX.toString());
     this.rightEye.setAttribute('y', rightEyeNewY.toString());
+
+    requestAnimationFrame(loop);
   };
   if (params.scrollEyes) {
     document.addEventListener('scroll', scrollUpdater);
