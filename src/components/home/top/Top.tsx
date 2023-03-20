@@ -57,11 +57,7 @@ const Top = () => {
         <div className="w-[350px] md:w-[500px] xl:w-[700px] ">
           <div className={`${'roboto'} text-center opacity-60  font-light text-sm md:text-base mb-2 `}>Hi my name is</div>
           <div className=" flex justify-center items-center mt-6 xl:mt-10 ">
-            <div
-              className={`${questrial.className} text-center relative pb-2 text-3xl md:text-7xl font-bold  ${styles.colorName} ${
-                word ? '' : styles.colorNameInactive
-              }`}
-            >
+            <div className={` text-center relative pb-2 text-3xl md:text-7xl font-bold`}>
               <div className="absolute top-5 w-full flex justify-center">
                 <div
                   className={`h-5 w-full blur-[80px] bg-[#BFF2FF]  ${word ? `opacity-50` : `opacity-0`} ${styles.colorName} ${
@@ -69,7 +65,13 @@ const Top = () => {
                   }  `}
                 ></div>
               </div>
-              Barbulescu
+              <div
+                className={`${montserrat.className}
+              ${styles.colorName} ${word ? '' : styles.colorNameInactive}
+              `}
+              >
+                Barbulescu
+              </div>
             </div>
             <div
               className={`${montserrat.className} relative text-center ml-3 xl:ml-6 text-3xl md:text-7xl font-bold pb-2  ${styles.colorName} ${
