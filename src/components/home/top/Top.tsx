@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Husky from './Husky';
-import styles from './top.module.css';
 import Canvas from './Canvas';
+import styles from './top.module.css';
 type windowWidth = null | number;
 
 // import { Montserrat, Questrial, Roboto } from 'next/font/google';
