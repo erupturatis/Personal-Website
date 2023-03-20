@@ -105,15 +105,17 @@ const Top = () => {
       )}
       <div className="w-full h-[800px]">
         {windowWidth !== null && (
-          <Canvas
-            x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
-            y1={0}
-            x2={windowWidth / 2}
-            y2={800}
-            widthP={windowWidth}
-            heightP={800}
-            accent={windowWidth > 1280 ? windowWidth / 10 : 0}
-          />
+          <>
+            {/* <Canvas
+              x1={windowWidth > 1536 ? 600 : windowWidth > 1280 ? 475 : windowWidth / 2}
+              y1={0}
+              x2={windowWidth / 2}
+              y2={800}
+              widthP={windowWidth}
+              heightP={800}
+              accent={windowWidth > 1280 ? windowWidth / 10 : 0}
+            /> */}
+          </>
         )}
       </div>
     </div>
