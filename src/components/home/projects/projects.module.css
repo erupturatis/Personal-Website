@@ -1,0 +1,13 @@
+.passionGrad {
+  background: #6417ff;
+  background: linear-gradient(to bottom, #3f99ff 0%, #2a939b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.webdevGrad {
+  background: #89e3ff;
+  background: linear-gradient(to bottom, #89e3ff 0%, #5f9bd3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

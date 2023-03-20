@@ -7,8 +7,8 @@ const Home = ({}) => {
   return (
     <>
       <Top />
-      {/* <Middle /> */}
-      {/* <Projects /> */}
+      <Middle />
+      <Projects />
     </>
   );
 };

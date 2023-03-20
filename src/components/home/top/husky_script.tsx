@@ -79,10 +79,10 @@ export function huskyScript(params: paramsHuskyScript) {
     const rightEyeDiffX = rightEyeExpectedX - rightEyeCurrentX;
     const rightEyeDiffY = rightEyeExpectedY - rightEyeCurrentY;
     // calculates new eye position
-    const leftEyeNewX = leftEyeCurrentX + leftEyeDiffX * movementSmoothing;
-    const leftEyeNewY = leftEyeCurrentY + leftEyeDiffY * movementSmoothing;
-    const rightEyeNewX = rightEyeCurrentX + rightEyeDiffX * movementSmoothing;
-    const rightEyeNewY = rightEyeCurrentY + rightEyeDiffY * movementSmoothing;
+    let leftEyeNewX = leftEyeCurrentX + leftEyeDiffX * movementSmoothing;
+    let leftEyeNewY = leftEyeCurrentY + leftEyeDiffY * movementSmoothing;
+    let rightEyeNewX = rightEyeCurrentX + rightEyeDiffX * movementSmoothing;
+    let rightEyeNewY = rightEyeCurrentY + rightEyeDiffY * movementSmoothing;
 
     // sets new eye position
     this.leftEye.setAttribute('x', leftEyeNewX.toString());
@@ -92,8 +92,20 @@ export function huskyScript(params: paramsHuskyScript) {
 
     requestAnimationFrame(loop);
   };
+
+  let svg = document.querySelector('#huskySvg');
+
+  const leftEye = document.querySelector('#lefteye');
+  const rightEye = document.querySelector('#righteye');
+
+  this.leftEye = leftEye;
+  this.rightEye = rightEye;
+
   if (params.scrollEyes) {
     document.addEventListener('scroll', scrollUpdater);
+    const scrollY = window.scrollY;
+    this.mouseY = scrollY + params.baseSize / 2;
+    this.mouseX = window.innerWidth / 2;
     let loopInt = requestAnimationFrame(loop);
     params.addInterval(loopInt);
   } else {
@@ -105,12 +117,5 @@ export function huskyScript(params: paramsHuskyScript) {
     let eListener = addEventListenerWithReference();
     params.addEvent(eListener);
   }
-  let svg = document.querySelector('#huskySvg');
-
-  const leftEye = document.querySelector('#lefteye');
-  const rightEye = document.querySelector('#righteye');
-
-  this.leftEye = leftEye;
-  this.rightEye = rightEye;
   // start loop 60 frames per second
 }

@@ -7,9 +7,10 @@ type ProjectSectionProps = {
   width: number;
   height: number;
   text: string;
+  grad: string;
 };
 
-const ProjectSection = ({ children, width, height, text }: ProjectSectionProps) => {
+const ProjectSection = ({ children, width, height, text, grad }: ProjectSectionProps) => {
   const divHandle = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (divHandle.current) {
@@ -24,7 +25,7 @@ const ProjectSection = ({ children, width, height, text }: ProjectSectionProps) 
       <div className="w-full flex justify-center items-center">
         <div>
           <div className="flex justify-center ">
-            <div className="text-white  text-center text-5xl  border-2 border-white">{text}</div>
+            <div className={` text-white  text-center text-5xl font-medium  ${grad}`}>{text}</div>
           </div>
           <div className="flex justify-center">
             <div className={` text-white  mt-24  relative `} ref={divHandle}>

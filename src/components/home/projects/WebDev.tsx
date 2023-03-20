@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 class Particle {
   constructor(effect, x, y, color) {
@@ -59,7 +60,7 @@ class Effect {
     this.centerY = this.height * 0.5;
     this.x = this.centerX - this.image.width * 0.5;
     this.y = this.centerY - this.image.height * 0.5;
-    this.gap = 3;
+    this.gap = 5;
     this.mouse = {
       radius: 10000,
       x: undefined,
@@ -68,9 +69,6 @@ class Effect {
     window.addEventListener('mousemove', (event) => {
       this.mouse.x = event.x - this.canvasCoord.left;
       this.mouse.y = window.scrollY - this.canvasCoord.y + event.y;
-      // console.log();
-      // console.log(this.mouse.x, this.mouse.y);
-      // console.log(this.canvasCoord);
     });
     this.methods = {
       warp: this.warp.bind(this),
@@ -83,21 +81,26 @@ class Effect {
   init(context) {
     context.drawImage(this.image, this.x, this.y);
     const pixels = context.getImageData(0, 0, this.width, this.height).data;
-    for (let y = 0; y < this.height; y += this.gap) {
-      for (let x = 0; x < this.width; x += this.gap) {
-        const index = (y * this.width + x) * 4;
+    let startX = this.x;
+    let startY = this.y;
+    startX = Math.floor(startX);
+    startY = Math.floor(startY);
+
+    for (let x = startX; x < this.image.height + startX; x += this.gap) {
+      for (let y = startY; y < this.image.width + startY + 20; y += this.gap) {
+        const index = (y + x * this.width) * 4;
         const red = pixels[index];
         const green = pixels[index + 1];
         const blue = pixels[index + 2];
         const alpha = pixels[index + 3];
-
         const color = 'rgb(' + red + ',' + green + ',' + blue + ')';
         if (alpha > 0) {
-          this.particlesArray.push(new Particle(this, x, y, color));
+          this.particlesArray.push(new Particle(this, y, x, color));
         }
       }
     }
   }
+
   draw(context) {
     this.particlesArray.forEach((particle) => particle.draw(context));
   }
@@ -118,6 +121,7 @@ type Props = {
   heightP: number;
 };
 const WebDev = ({ widthP, heightP }: Props) => {
+  const canvasWrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const canvas = document.getElementById('canvasWeb');
     canvas.width = widthP;
@@ -125,11 +129,10 @@ const WebDev = ({ widthP, heightP }: Props) => {
 
     const ctx = canvas.getContext('2d');
     const image = new Image();
-    image.src = '/lefteye.png';
+    image.src = '/js.png';
     const { width, height } = image;
     image.width = width;
     image.height = height;
-    console.log(width, height);
     image.onload = () => {
       const effect = new Effect(image, canvas);
       effect.init(ctx);
@@ -149,8 +152,6 @@ const WebDev = ({ widthP, heightP }: Props) => {
       }
 
       let warp = factory(effect, 'warp', [0.1]);
-      // this.document.getElementById('warpButton').addEventListener('click', warp);
-
       animate();
     };
 
@@ -166,7 +167,7 @@ const WebDev = ({ widthP, heightP }: Props) => {
   return (
     <div className="w-[500px] h-[500px] relative">
       <div className="opacity-50  text-center text-xl">Hover me</div>
-      <div className="absolute md:top-[-250px] md:left-[-250px]">
+      <div className="absolute ml-[-250px] mt-[-250px] ">
         <canvas id="canvasWeb" width={500} height={500} />
       </div>
     </div>
