@@ -91,10 +91,10 @@ const Top = () => {
         <>
           <div className={`  ${windowWidth > 1280 ? 'absolute 2x:right-40 xl:right-20  top-40' : ' flex  justify-center w-full   z-0 relative'} `}>
             {windowWidth > 1280 ? (
-              <Husky scale={windowWidth / 1920} scrollEyes={false} />
+              <>{/* <Husky scale={windowWidth / 1920} scrollEyes={false} /> */}</>
             ) : (
               <div>
-                <Husky scale={windowWidth < 500 ? windowWidth / 800 : windowWidth / 1280} scrollEyes={true} />
+                {/* <Husky scale={windowWidth < 500 ? windowWidth / 800 : windowWidth / 1280} scrollEyes={true} /> */}
                 <div className="relative">{/* <div id={'huskyScrollTop'} className="absolute top-0"></div> */}</div>
               </div>
             )}
