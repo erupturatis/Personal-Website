@@ -11,3 +11,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.parralax {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+.parralaxChild {
+  background-color: #2a939b;
+  transform: translateZ(50px);
+}
