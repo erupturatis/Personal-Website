@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import Canvas from '../top/Canvas';
 import WebDev from './webdev/WebDev';
 import ProjectSection from './ProjectSection';
-import MachineLearning from './MachineLearning';
 import { Montserrat } from 'next/font/google';
 import styles from './projects.module.css';
+import Math from './Math';
 
 const montserrat = Montserrat({
   weight: ['300', '400', '500', '600', '700'],
@@ -60,7 +60,7 @@ const Projects = () => {
               <div className='relative'>
                 <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
-              {/* <ProjectSection width={800} height={500} text={'Deep Learning'} children={<MachineLearning />} /> */}
+              <ProjectSection width={800} height={500} text={'Deep Learning and Mathematics'} children={<Math />} grad={styles.math} />
               <div className='relative'>
                 <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>

@@ -7,7 +7,7 @@ type ProjectSectionProps = {
   width: number;
   height: number;
   text: string;
-  grad: string;
+  grad?: string;
 };
 
 const ProjectSection = ({ children, width, height, text, grad }: ProjectSectionProps) => {
@@ -25,7 +25,7 @@ const ProjectSection = ({ children, width, height, text, grad }: ProjectSectionP
       <div className='w-full flex justify-center items-center'>
         <div>
           <div className='flex justify-center '>
-            <div className={` text-white  text-center text-5xl p-4 font-medium  ${grad}`}>{text}</div>
+            <div className={` text-white  text-center text-5xl p-4 font-medium select-none  ${grad}`}>{text}</div>
           </div>
           <div className='flex justify-center'>
             <div className={` text-white  mt-24  relative  `} ref={divHandle}>
