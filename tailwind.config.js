@@ -16,13 +16,15 @@ module.exports = {
           50: '#f9fafb',
         },
       },
-      dropShadow: {},
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
         questrial: ['var(--font-questrial)'],
         roboto: ['var(--font-roboto)'],
       },
+      boxShadow: {
+        standard: '0px 4px 20px rgba(255, 255, 255, 0.15)',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

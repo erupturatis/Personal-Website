@@ -21,14 +21,14 @@ const ProjectSection = ({ children, width, height, text, grad }: ProjectSectionP
   }, []);
 
   return (
-    <div>
-      <div className="w-full flex justify-center items-center">
+    <div className='mb-24 '>
+      <div className='w-full flex justify-center items-center'>
         <div>
-          <div className="flex justify-center ">
-            <div className={` text-white  text-center text-5xl font-medium  ${grad}`}>{text}</div>
+          <div className='flex justify-center '>
+            <div className={` text-white  text-center text-5xl p-4 font-medium  ${grad}`}>{text}</div>
           </div>
-          <div className="flex justify-center">
-            <div className={` text-white  mt-24  relative `} ref={divHandle}>
+          <div className='flex justify-center'>
+            <div className={` text-white  mt-24  relative  `} ref={divHandle}>
               {children}
             </div>
           </div>

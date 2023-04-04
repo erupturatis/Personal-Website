@@ -16,7 +16,49 @@
   transform-style: preserve-3d;
   transform: perspective(1000px);
 }
-.parralaxChild {
-  background-color: #2a939b;
+.parralaxChild100 {
+  background-color: transparent;
+  transform: translateZ(100px);
+}
+
+.parralaxChild75 {
+  background-color: transparent;
+  transform: translateZ(75px);
+}
+
+.parralaxChild50 {
+  background-color: transparent;
   transform: translateZ(50px);
+}
+
+.parralaxChild25 {
+  background-color: transparent;
+  transform: translateZ(25px);
+}
+
+.js_image {
+  background-image: url('/js.png');
+}
+
+.css_image {
+  background-image: url('/css.png');
+}
+
+.html_image {
+  background-image: url('/html.png');
+}
+
+.console_image {
+  background-image: url('/console.png');
+}
+
+.imgprops {
+  background-repeat: no-repeat;
+  /* background-size: contain; */
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
 }

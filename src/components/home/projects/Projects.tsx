@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Canvas from '../top/Canvas';
-import WebDev from './WebDev';
+import WebDev from './webdev/WebDev';
 import ProjectSection from './ProjectSection';
 import MachineLearning from './MachineLearning';
 import { Montserrat } from 'next/font/google';
@@ -55,12 +55,12 @@ const Projects = () => {
                 <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
 
-              <ProjectSection width={500} height={500} text={'Web Development'} children={<WebDev />} grad={styles.webdevGrad} />
+              <ProjectSection width={1000} height={800} text={'Programming'} children={<WebDev />} grad={styles.webdevGrad} />
 
               <div className='relative'>
                 <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
-              <ProjectSection width={800} height={500} text={'Deep Learning'} children={<MachineLearning />} />
+              {/* <ProjectSection width={800} height={500} text={'Deep Learning'} children={<MachineLearning />} /> */}
               <div className='relative'>
                 <Canvas x1={windowWidth / 2} y1={0} x2={windowWidth / 2} y2={800} widthP={windowWidth} heightP={800} accent={0} offset={-200} />
               </div>
