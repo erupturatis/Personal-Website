@@ -42,6 +42,7 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
     if (holder) {
       holder.style.height = `${height}px`;
       holder.style.width = `${width}px`;
+      console.log(height, width, baseSize);
     }
     const sWidth = holder?.clientWidth;
     function generateDiv(baseSize: number, url: string) {
@@ -102,7 +103,7 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
 
   return (
     <>
-      <div className="flex w-full justify-center">
+      <div className='flex w-full justify-center'>
         <div className={` FloatingHolder  relative mb-32 ${styles.mask}`}></div>;
       </div>
     </>

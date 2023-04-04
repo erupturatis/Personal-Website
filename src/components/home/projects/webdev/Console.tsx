@@ -70,6 +70,7 @@ const Console = () => {
       document.removeEventListener('keydown', handleArrowUp);
     };
   }, []);
+
   return (
     <div className={` w-full h-full flex flex-col bg-black text-lime-400 rounded-2xl shadow-lg shadow-lime-400 `}>
       <div className=' overflow-y-auto p-4 grow  scrollbar-none'>
@@ -91,7 +92,6 @@ const Console = () => {
                 setArrowsUp(0);
               }}
               autoComplete='off'
-              autoFocus
             />
           </p>
         </form>

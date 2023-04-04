@@ -32,7 +32,6 @@ const Projects = () => {
       setWindowWidth(doc.getBoundingClientRect().width);
     }
     window.addEventListener('resize', () => {
-      // setWindowWidth(window.innerWidth);
       if (!doc) return;
       setWindowWidth(doc.getBoundingClientRect().width);
     });
