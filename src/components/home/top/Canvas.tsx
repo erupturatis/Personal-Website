@@ -1,6 +1,4 @@
-import { useEffect, useRef } from 'react';
-import { useState } from 'react';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type CanvasProps = {
   x1: number;
@@ -13,11 +11,18 @@ type CanvasProps = {
   offset?: number;
 };
 
-const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps) => {
+const Canvas = ({
+  x1,
+  y1,
+  x2,
+  y2,
+  widthP,
+  heightP,
+  accent,
+  offset,
+}: CanvasProps) => {
   const [width, setWidth] = useState(widthP);
-  const stop = useRef(false);
   const wrapper = useRef<HTMLDivElement>(null);
-  const currentWidth = useRef(widthP);
 
   const [animId, setAnimId] = useState<number>(0);
   const [listener, setListener] = useState<EventListener | null>(null);
@@ -42,7 +47,7 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
 
   function scrollCalculator() {
     const handleScroll = (topY: number, bottomY: number) => {
-      const scroll = window.scrollY + (window.innerHeight * 1) / 2;
+      const scroll = window.scrollY + window.innerHeight / 2;
       // getting element with id huskyScrollTop absolute coordinates
       if (scroll > topY && scroll < bottomY) {
         clipLine.current = ((scroll - topY) / (bottomY - topY)) * 100;
@@ -59,8 +64,10 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
     }
 
     if (huskyScrollTop && huskyScrollBottom) {
-      topY = huskyScrollTop.getBoundingClientRect().top + window.scrollY + offset;
-      bottomY = huskyScrollBottom.getBoundingClientRect().top + window.scrollY + offset;
+      topY =
+        huskyScrollTop.getBoundingClientRect().top + window.scrollY + offset;
+      bottomY =
+        huskyScrollBottom.getBoundingClientRect().top + window.scrollY + offset;
     }
     // adds event listener for scroll
     let cb = addEventListenerRef('scroll', () => {
@@ -75,11 +82,27 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
     const ctx = lineCanvas.getContext('2d');
     if (!ctx) return 0;
     // function to draw line from x1, y1 to x2, y2
-    const drawLine = (x1: number, y1: number, x2: number, y2: number, accent: number) => {
+    const drawLine = (
+      x1: number,
+      y1: number,
+      x2: number,
+      y2: number,
+      accent: number
+    ) => {
       ctx.beginPath();
       ctx.moveTo(x1, y1);
-      ctx.quadraticCurveTo((x2 + x1) / 2 - accent, (y2 + y1) / 2 - accent, (x2 + x1) / 2, (y2 + y1) / 2);
-      ctx.quadraticCurveTo((x2 + x1) / 2 + accent, (y2 + y1) / 2 + accent, x2, y2 - 20);
+      ctx.quadraticCurveTo(
+        (x2 + x1) / 2 - accent,
+        (y2 + y1) / 2 - accent,
+        (x2 + x1) / 2,
+        (y2 + y1) / 2
+      );
+      ctx.quadraticCurveTo(
+        (x2 + x1) / 2 + accent,
+        (y2 + y1) / 2 + accent,
+        x2,
+        y2 - 20
+      );
       ctx.strokeStyle = 'white';
       ctx.stroke();
       //make line white
@@ -87,7 +110,13 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
 
     const redraw = () => {
       ctx.clearRect(0, 0, width, heightP);
-      drawLine(refX1.current, refY1.current, refX2.current, refY2.current, refAccent.current);
+      drawLine(
+        refX1.current,
+        refY1.current,
+        refX2.current,
+        refY2.current,
+        refAccent.current
+      );
       ctx.fillStyle = '#0d0d0e';
       if (clipLine.current > 0) {
         //@ts-ignore
@@ -134,12 +163,20 @@ const Canvas = ({ x1, y1, x2, y2, widthP, heightP, accent, offset }: CanvasProps
     refX2.current = x2;
     refY2.current = y2;
     refAccent.current = accent;
+    console.log(widthP);
   }, [widthP]);
 
   return (
     <div ref={wrapper}>
       <div ref={refDivTop} />
-      <canvas ref={canvasRef} width={widthP} height={heightP} className="relative z-[-40]" />
+      {widthP != 0 && (
+        <canvas
+          ref={canvasRef}
+          width={widthP}
+          height={heightP}
+          className='relative z-[-40]'
+        />
+      )}
       <div ref={refDivBottom} />
     </div>
   );

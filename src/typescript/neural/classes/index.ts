@@ -1,5 +1,4 @@
 import document from '../Utils/document';
-
 import { delay } from '../Utils/general';
 import {
   layerParams,
@@ -13,6 +12,7 @@ import {
   initialPositions,
   connection,
 } from '../interfaces/interface';
+// @ts-ignore
 import * as d3 from 'd3';
 
 import { assignRandomPositions, generateNeuron, generateConnProps } from '../Utils/generator';
@@ -20,6 +20,7 @@ import { assignRandomPositions, generateNeuron, generateConnProps } from '../Uti
 interface posObject {
   index: number;
   posX: number;
+
   posY: number;
 }
 
@@ -664,6 +665,7 @@ export class PhysicsNetwork extends BasePainter {
 
       this.instantTransition();
     }
+    console.log('Rendering stopped');
     this.running = false;
     // write code for drawing the neurons
   }

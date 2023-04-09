@@ -1,15 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import styles from './floating.module.css';
 import anime from 'animejs';
-import { useState, useEffect } from 'react';
+import useWindowWidth from '@hooks/useWindowWidth';
 
-type FloatingProps = {
-  width: number;
-  height: number;
-  baseSize: number;
-};
+const Floating = () => {
+  const windowWidth = useWindowWidth();
+  let width = 0;
+  let height = 0;
+  let baseSize = 0;
 
-const Floating = ({ height, width, baseSize }: FloatingProps) => {
+  useLayoutEffect(() => {
+    width = windowWidth.current;
+    height = 400;
+    baseSize = windowWidth ? (windowWidth.current < 500 ? 50 : 100) : 100;
+  }, []);
+
   function shuffle(array: any[]) {
     let currentIndex = array.length,
       randomIndex;
@@ -21,14 +26,30 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
       currentIndex--;
 
       // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
 
     return array;
   }
 
   const urlRandomizing = () => {
-    const skills = ['cpp', 'csharp', 'python', 'js', 'ts', 'html', 'css', 'tailwind', 'react', 'nextjs', 'photoshop', 'pytorch'];
+    const skills = [
+      'cpp',
+      'csharp',
+      'python',
+      'js',
+      'ts',
+      'html',
+      'css',
+      'tailwind',
+      'react',
+      'nextjs',
+      'photoshop',
+      'pytorch',
+    ];
     return shuffle(
       skills.map((skill) => {
         return `/floatingLogos/${skill}.png`;
@@ -38,13 +59,14 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
 
   useEffect(() => {
     // generating numDivs divs
-    const holder: HTMLDivElement | null = document.querySelector('.FloatingHolder');
+    const holder: HTMLDivElement | null =
+      document.querySelector('.FloatingHolder');
     if (holder) {
       holder.style.height = `${height}px`;
       holder.style.width = `${width}px`;
-      console.log(height, width, baseSize);
     }
     const sWidth = holder?.clientWidth;
+
     function generateDiv(baseSize: number, url: string) {
       const baseAnimationSpeed = 5000;
 
@@ -55,8 +77,11 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
       div.style.width = `${distanceCoefficient}px`;
       div.style.height = `${distanceCoefficient}px`;
       div.style.borderRadius = `25%`;
-      div.style.marginTop = `${Math.random() * (height - (baseSize * 4) / 3) + baseSize / 3}px`;
-      let animationDuration = (1 / (distanceCoefficient / baseSize)) * baseAnimationSpeed;
+      div.style.marginTop = `${
+        Math.random() * (height - (baseSize * 4) / 3) + baseSize / 3
+      }px`;
+      let animationDuration =
+        (1 / (distanceCoefficient / baseSize)) * baseAnimationSpeed;
       div.style.zIndex = `${distanceCoefficient}`;
       div.style.backgroundImage = `url('${url}')`;
       div.style.backgroundRepeat = 'no-repeat';
@@ -96,15 +121,12 @@ const Floating = ({ height, width, baseSize }: FloatingProps) => {
     return () => {};
   }, []);
 
-  const [widthState, setWidth] = useState(width);
   const [heightState, setHeight] = useState(height);
-
-  const containerHeight = useRef(heightState);
 
   return (
     <>
       <div className='flex w-full justify-center'>
-        <div className={` FloatingHolder  relative mb-32 ${styles.mask}`}></div>;
+        <div className={` FloatingHolder  relative mb-32 ${styles.mask}`}></div>
       </div>
     </>
   );

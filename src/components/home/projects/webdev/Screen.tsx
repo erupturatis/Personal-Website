@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { WebDevContext } from './WebContext';
 import Cookie from './Cookie';
 import News from './News';
@@ -16,10 +16,16 @@ const Screen = () => {
         return (
           <div>
             <div className=' flex flex-col'>
-              <button className='m-4 w-12 h-12 rounded-md overflow-hidden' onClick={() => setContentCb('news')}>
+              <button
+                className='m-4 w-12 h-12 rounded-md overflow-hidden'
+                onClick={() => setContentCb('news')}
+              >
                 <img src='news.png' alt='' />
               </button>
-              <button className='m-4 w-12 h-12 rounded-md overflow-hidden' onClick={() => setContentCb('cookie')}>
+              <button
+                className='m-4 w-12 h-12 rounded-md overflow-hidden'
+                onClick={() => setContentCb('cookie')}
+              >
                 <img src='cookie.png' alt='' />
               </button>
             </div>
