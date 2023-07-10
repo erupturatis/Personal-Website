@@ -1,29 +1,53 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { huskyScript, paramsHuskyScript } from './husky-script';
 
 type IHuskyProps = {
   width: number;
 };
 
+type IState = {
+  eventListeners: any[];
+  intervals: any[];
+};
+
+const initialState = {
+  eventListeners: [],
+  intervals: [],
+};
+
+const reducer = (
+  state: IState,
+  action: { type: string; payload: any }
+): IState => {
+  switch (action.type) {
+    case 'ADD_LISTENER':
+      return {
+        ...state,
+        eventListeners: [...state.eventListeners, action.payload],
+      };
+    case 'ADD_ANIMATION':
+      return { ...state, intervals: [...state.intervals, action.payload] };
+    default:
+      return state;
+  }
+};
+
 const Husky = ({ width }: IHuskyProps) => {
   // standard size is 800x800
-  const [anims, setAnims] = useState<any>([]);
-  const [eListener, setEListener] = useState<any>([]);
   const baseSize = useRef(0);
-
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // keeps track of event listeners and intervals sed in the husky
+  const addInterval = (newInterval: any) => {
+    dispatch({ type: 'ADD_ANIMATION', payload: newInterval });
+  };
+  const addEvent = (newEvent: any) => {
+    dispatch({ type: 'ADD_LISTENER', payload: newEvent });
+  };
   // for desktop screens
   useEffect(() => {
-    // matches media for 1920 and 1280
-    let scale = 1;
-    let scrollEyes = true;
-    if (width > 1280) {
-      scrollEyes = false;
-      const scale = width / 1920;
-    } else if (width > 500 && width < 1280) {
-      scale = width / 1280;
-    } else {
-      scale = width / 800;
-    }
+    const scale = // scale ratios for the husky
+      width > 1280 ? width / 1920 : width > 500 ? width / 1280 : width / 800;
+    const scrollEyes = width > 1280;
     baseSize.current = 800 * scale;
     const { current: base } = baseSize;
 
@@ -39,41 +63,24 @@ const Husky = ({ width }: IHuskyProps) => {
       scale: scale,
       scrollEyes: scrollEyes,
       baseSize: 800 * scale,
-      addInterval: (newInterval: any) => {
-        setAnims((interval: any) => {
-          let newVec = [...interval];
-          newVec.push(newInterval);
-          return newVec;
-        });
-      },
-      addEvent: (newEvent: any) => {
-        setEListener((eListener: any) => {
-          let newVec = [...eListener];
-          newVec.push(newEvent);
-          return newVec;
-        });
-      },
+      addEvent,
+      addInterval,
     };
     let adjuster = huskyScript.bind(() => {})(params);
   }, []);
 
-  useLayoutEffect(() => {
-    return () => {
-      for (let e of eListener) {
-        document.removeEventListener('mousemove', e);
-      }
-    };
-  }, [eListener]);
-
   useEffect(() => {
     return () => {
-      if (anims.length > 0) {
-        for (let int of anims) {
-          cancelAnimationFrame(int);
-        }
+      for (let event of state.eventListeners) {
+        document.removeEventListener('mousemove', event);
+      }
+      if (!state.intervals.length) return;
+      for (let intervals of state.intervals) {
+        cancelAnimationFrame(intervals);
       }
     };
-  }, [anims]);
+  }, []);
+
   return (
     <>
       <svg

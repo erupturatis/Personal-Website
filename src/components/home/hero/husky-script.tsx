@@ -10,8 +10,8 @@ export type paramsHuskyScript = {
   rightEyeCenterOffsetX: number;
   rightEyeCenterOffsetY: number;
   scale: number;
-  addInterval: any; // used to clear all intervals on exiting the page
-  addEvent: any; // used to clear all event listeners on exiting the page
+  addInterval: (newInterval: any) => void; // used to clear all intervals on exiting the page
+  addEvent: (newEvent: any) => void; // used to clear all event listeners on exiting the page
   scrollEyes?: boolean;
   baseSize?: number;
   count?: number;
@@ -42,10 +42,18 @@ export function huskyScript(params: paramsHuskyScript) {
     let rect = svg?.getBoundingClientRect();
     this.rect = rect;
     // calculates vector from center of eyes to mouse
-    const leftEyeX = this.mouseX - (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
-    const leftEyeY = this.mouseY - (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);
-    const rightEyeX = this.mouseX - (params.rightEyeBaseX + params.rightEyeCenterOffsetX + this.rect.x);
-    const rightEyeY = this.mouseY - (params.rightEyeBaseY + params.rightEyeCenterOffsetY + this.rect.y);
+    const leftEyeX =
+      this.mouseX -
+      (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
+    const leftEyeY =
+      this.mouseY -
+      (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);
+    const rightEyeX =
+      this.mouseX -
+      (params.rightEyeBaseX + params.rightEyeCenterOffsetX + this.rect.x);
+    const rightEyeY =
+      this.mouseY -
+      (params.rightEyeBaseY + params.rightEyeCenterOffsetY + this.rect.y);
 
     // calculates angle of vector
     const leftEyeAngle = Math.atan2(leftEyeY, leftEyeX);
