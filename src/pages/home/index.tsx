@@ -1,26 +1,18 @@
 import React from 'react';
-import Middle from '@components/home/middle/Middle';
-import Bottom from '@components/home/Bottom/Bottom';
-import dynamic from 'next/dynamic';
-import Top from '@components/home/top/Top';
+import Skills from '@components/home/skills/Skills';
+import Top from '@components/home/hero/Top';
 
-const Projects = dynamic(() => import('@components/home/projects/Projects'), {
-  loading: () => <p>Loading...</p>,
-});
+export async function getStaticProps() {
+  return { props: {} };
+}
 
 const Home = ({}) => {
   return (
     <>
       <Top />
-      <Middle />
-      <Projects />
-      <Bottom />
+      <Skills />
     </>
   );
 };
-
-export async function getStaticProps() {
-  return { props: {} };
-}
 
 export default Home;

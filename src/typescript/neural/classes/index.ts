@@ -1,21 +1,25 @@
 import document from '../Utils/document';
 import { delay } from '../Utils/general';
 import {
+  circleParams,
+  connection,
+  coord,
+  forceUpdater,
+  initialPositions,
   layerParams,
   neuron,
-  coord,
   propUpdater,
-  forceUpdater,
-  renderingParamsTransition,
   renderingParamsPhysics,
-  circleParams,
-  initialPositions,
-  connection,
+  renderingParamsTransition,
 } from '../interfaces/interface';
 // @ts-ignore
 import * as d3 from 'd3';
 
-import { assignRandomPositions, generateNeuron, generateConnProps } from '../Utils/generator';
+import {
+  assignRandomPositions,
+  generateConnProps,
+  generateNeuron,
+} from '../Utils/generator';
 
 interface posObject {
   index: number;
@@ -60,7 +64,10 @@ export class BasePainter extends Params {
   constructor(htmlElement: SVGSVGElement) {
     super();
     this.document = document;
-    if (this.document !== 'undefined' && typeof this.document.hidden !== 'undefined') {
+    if (
+      this.document !== 'undefined' &&
+      typeof this.document.hidden !== 'undefined'
+    ) {
       // Add a visibility change event listener
       this.document.addEventListener('visibilitychange', () => {
         this.hidden = this.document.hidden;
@@ -178,7 +185,13 @@ export class BasePainter extends Params {
   }
 
   assignRandomPosition() {
-    assignRandomPositions(this.neurons, this.minX, this.maxX, this.minY, this.maxY);
+    assignRandomPositions(
+      this.neurons,
+      this.minX,
+      this.maxX,
+      this.minY,
+      this.maxY
+    );
   }
 
   addArg(index: number, key: string, flag: any): void {
@@ -186,7 +199,9 @@ export class BasePainter extends Params {
   }
 
   generateNeuronLayers(params: layerParams) {
-    let nrNeurons: number = params.layers.reduce((prevVal, currVal) => prevVal + currVal);
+    let nrNeurons: number = params.layers.reduce(
+      (prevVal, currVal) => prevVal + currVal
+    );
     this.generateNeurons(nrNeurons);
     this.arrangeInLayers(params);
   }
@@ -200,7 +215,7 @@ export class BasePainter extends Params {
     this.distanceLayers = params.distanceLayers;
     this.distanceNeurons = params.distanceNeurons;
     // arranges existent neurons in layers
-    // the network will be centered around in the middle of the svg or group
+    // the network will be centered around in the skills of the svg or group
 
     // calculating X positions based on layerDistance
     let unit: number = params.distanceLayers;
@@ -225,7 +240,9 @@ export class BasePainter extends Params {
   }
 
   checkParams(params: any, mustHave: any) {
-    let missing = mustHave.filter((item: any) => !Object.keys(params).includes(item));
+    let missing = mustHave.filter(
+      (item: any) => !Object.keys(params).includes(item)
+    );
     if (missing.length > 0) {
       throw new Error(`missing params: ${missing}`);
     }
@@ -433,7 +450,11 @@ export class BasePainter extends Params {
 export class TransitionNetwork extends BasePainter {
   transitionTime: number = 500;
   transitionInterval: number = 2000; // the time between the transitions
-  propertiesUpdater: propUpdater = (neurons: neuron[], connections: connection[], iter: number) => {}; // gets called to set next transition positions
+  propertiesUpdater: propUpdater = (
+    neurons: neuron[],
+    connections: connection[],
+    iter: number
+  ) => {}; // gets called to set next transition positions
 
   constructor(htmlElement: SVGSVGElement) {
     super(htmlElement);
@@ -537,7 +558,11 @@ export class TransitionNetwork extends BasePainter {
     // starts the render loop
 
     this.iter = 0;
-    while (this.running && (params.infinite || (params.iterations !== undefined && this.iter < params.iterations))) {
+    while (
+      this.running &&
+      (params.infinite ||
+        (params.iterations !== undefined && this.iter < params.iterations))
+    ) {
       //the new positions will be calculated
       if (this.hidden) {
         await delay(200);
@@ -576,9 +601,17 @@ export class PhysicsNetwork extends BasePainter {
 
   forces: coord[] = []; // the forces that will be applied to the neurons
 
-  addForces: forceUpdater = (neurons: neuron[], forces: coord[], iter: number) => {}; // gets called to add forces to the neurons
+  addForces: forceUpdater = (
+    neurons: neuron[],
+    forces: coord[],
+    iter: number
+  ) => {}; // gets called to add forces to the neurons
 
-  addInitialForces: forceUpdater = (neurons: neuron[], forces: coord[], iter: number) => {}; // gets called to add initial forces to the neurons
+  addInitialForces: forceUpdater = (
+    neurons: neuron[],
+    forces: coord[],
+    iter: number
+  ) => {}; // gets called to add initial forces to the neurons
 
   constructor(htmlElement: SVGSVGElement) {
     super(htmlElement);
@@ -651,7 +684,11 @@ export class PhysicsNetwork extends BasePainter {
     // dispatch initial forces (may also pe async for loops)
     this.addInitialForces(this.neurons, this.forces, this.iter);
     // starts the render loop
-    while (this.running && (params.infinite || (params.seconds !== undefined && this.iter < params.seconds * this.FPS))) {
+    while (
+      this.running &&
+      (params.infinite ||
+        (params.seconds !== undefined && this.iter < params.seconds * this.FPS))
+    ) {
       console.log('Rendering', this.hidden);
       // drawing the neurons with new positions
       this.instantTransition();

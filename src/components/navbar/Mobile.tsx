@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import NavButtonMobile from './NavButtonMobile';
+import ButtonMobile from './ButtonMobile';
 
 type body = null | HTMLBodyElement;
-const NavMobile = () => {
+const Mobile = () => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState<body>(null);
 
@@ -52,7 +52,7 @@ const NavMobile = () => {
             open ? '' : 'left-[100%]'
           }`}
         >
-          <NavButtonMobile
+          <ButtonMobile
             text={'Home'}
             link={'home'}
             openNav={() => {
@@ -62,7 +62,7 @@ const NavMobile = () => {
             }}
           />
 
-          <NavButtonMobile
+          <ButtonMobile
             text={'Contact'}
             link={'contact'}
             openNav={() => {
@@ -70,7 +70,7 @@ const NavMobile = () => {
               enableScroll();
             }}
           />
-          <NavButtonMobile
+          <ButtonMobile
             text={'Projects'}
             link={'projects'}
             openNav={() => {
@@ -84,4 +84,4 @@ const NavMobile = () => {
   );
 };
 
-export default NavMobile;
+export default Mobile;

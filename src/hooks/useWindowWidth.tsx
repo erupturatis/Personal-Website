@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 
-// hook that gives a reference to the windowWidth before the first paint
-// the reference will update on screen change because of the useState hook which triggers rerenders
+// gives the exact window width
 const useWindowWidth = () => {
   const [_, setWindowWidth] = useState<number>(0);
   const windowWidthRef = useRef(0);

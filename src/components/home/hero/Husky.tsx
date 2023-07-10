@@ -1,28 +1,28 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { huskyScript, paramsHuskyScript } from './husky_script';
+import { huskyScript, paramsHuskyScript } from './husky-script';
 
-type HuskyProps = {
-  width: any;
+type IHuskyProps = {
+  width: number;
 };
 
-const Husky = ({ width }: HuskyProps) => {
+const Husky = ({ width }: IHuskyProps) => {
   // standard size is 800x800
   const [anims, setAnims] = useState<any>([]);
   const [eListener, setEListener] = useState<any>([]);
   const baseSize = useRef(0);
 
   // for desktop screens
-  useLayoutEffect(() => {
+  useEffect(() => {
     // matches media for 1920 and 1280
     let scale = 1;
     let scrollEyes = true;
-    if (width.current > 1280) {
+    if (width > 1280) {
       scrollEyes = false;
-      const scale = width.current / 1920;
-    } else if (width.current > 500 && width.current < 1280) {
-      scale = width.current / 1280;
+      const scale = width / 1920;
+    } else if (width > 500 && width < 1280) {
+      scale = width / 1280;
     } else {
-      scale = width.current / 800;
+      scale = width / 800;
     }
     baseSize.current = 800 * scale;
     const { current: base } = baseSize;

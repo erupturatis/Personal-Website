@@ -1,9 +1,9 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import styles from './floating.module.css';
+import styles from '@styles/skills.module.css';
 import anime from 'animejs';
 import useWindowWidth from '@hooks/useWindowWidth';
 
-const Floating = () => {
+const FloatingSkills = () => {
   const windowWidth = useWindowWidth();
   let width = 0;
   let height = 0;
@@ -132,4 +132,4 @@ const Floating = () => {
   );
 };
 
-export default Floating;
+export default FloatingSkills;

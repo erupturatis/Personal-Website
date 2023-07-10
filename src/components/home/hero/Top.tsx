@@ -1,8 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import useWindowWidth from '@hooks/useWindowWidth';
 import Husky from './Husky';
-import Canvas from './Canvas';
-import styles from './top.module.css';
+import styles from '@styles/hero.module.css';
 
 import { Montserrat, Questrial, Roboto } from 'next/font/google';
 
@@ -16,12 +15,6 @@ const questrial = Questrial({
   weight: ['400'],
   subsets: ['latin'],
   variable: '--font-questrial',
-});
-
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
 });
 
 const Top = () => {
@@ -100,7 +93,7 @@ const Top = () => {
         <div
           className={`  ${
             width.current > 1280
-              ? 'absolute 2xl:right-40 xl:right-20  top-40'
+              ? 'absolute 2xl:right-40 xl:right-20  hero-40'
               : ' flex  justify-center w-full z-0 relative pl-8'
           } `}
         >
@@ -123,23 +116,6 @@ const Top = () => {
         </div>
       </>
       <div className='w-full h-[800px]'>
-        {width.current > 0 && (
-          <Canvas
-            x1={
-              width.current > 1536
-                ? 600
-                : width.current > 1280
-                ? 475
-                : width.current / 2
-            }
-            y1={0}
-            x2={width.current / 2}
-            y2={800}
-            widthP={width.current}
-            heightP={800}
-            accent={width.current > 1280 ? width.current / 10 : 0}
-          />
-        )}
       </div>
     </div>
   );

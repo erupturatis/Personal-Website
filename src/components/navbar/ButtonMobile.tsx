@@ -18,7 +18,7 @@ type navButtonProps = {
   openNav: () => void;
 };
 
-const NavButtonMobile = ({ text, link, openNav }: navButtonProps) => {
+const ButtonMobile = ({ text, link, openNav }: navButtonProps) => {
   return (
     <div>
       <Link
@@ -35,4 +35,4 @@ const NavButtonMobile = ({ text, link, openNav }: navButtonProps) => {
   );
 };
 
-export default NavButtonMobile;
+export default ButtonMobile;

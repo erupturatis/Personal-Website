@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Roboto } from 'next/font/google';
 
-import styles from './buttons.module.css';
+import styles from '@styles/home-buttons.module.css';
 
 const roboto300 = Roboto({
   weight: '300',
@@ -20,7 +20,7 @@ type navButtonProps = {
   inverse: boolean;
 };
 
-const NavButtonDesktop = ({ text, link, inverse }: navButtonProps) => {
+const ButtonDesktop = ({ text, link, inverse }: navButtonProps) => {
   return (
     <Link href={link}>
       <div
@@ -36,4 +36,4 @@ const NavButtonDesktop = ({ text, link, inverse }: navButtonProps) => {
   );
 };
 
-export default NavButtonDesktop;
+export default ButtonDesktop;
