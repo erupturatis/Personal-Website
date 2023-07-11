@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useRef } from 'react';
-import { huskyScript, paramsHuskyScript } from './husky-script';
+import React, { useEffect, useLayoutEffect, useReducer, useRef } from 'react';
+import { HuskyObject, IParamsHuskyScript } from './husky-script';
 
 type IHuskyProps = {
   width: number;
@@ -7,12 +7,12 @@ type IHuskyProps = {
 
 type IState = {
   eventListeners: any[];
-  intervals: any[];
+  animationFrames: any[];
 };
 
 const initialState = {
   eventListeners: [],
-  intervals: [],
+  animationFrames: [],
 };
 
 const reducer = (
@@ -26,7 +26,10 @@ const reducer = (
         eventListeners: [...state.eventListeners, action.payload],
       };
     case 'ADD_ANIMATION':
-      return { ...state, intervals: [...state.intervals, action.payload] };
+      return {
+        ...state,
+        animationFrames: [...state.animationFrames, action.payload],
+      };
     default:
       return state;
   }
@@ -37,21 +40,24 @@ const Husky = ({ width }: IHuskyProps) => {
   const baseSize = useRef(0);
   const [state, dispatch] = useReducer(reducer, initialState);
   // keeps track of event listeners and intervals sed in the husky
-  const addInterval = (newInterval: any) => {
-    dispatch({ type: 'ADD_ANIMATION', payload: newInterval });
+  const addAnimation = (newAnimation: any) => {
+    dispatch({ type: 'ADD_ANIMATION', payload: newAnimation });
   };
   const addEvent = (newEvent: any) => {
     dispatch({ type: 'ADD_LISTENER', payload: newEvent });
   };
+
+  useEffect(() => {}, [state]);
   // for desktop screens
   useEffect(() => {
     const scale = // scale ratios for the husky
       width > 1280 ? width / 1920 : width > 500 ? width / 1280 : width / 800;
-    const scrollEyes = width > 1280;
+    const scrollEyes = width < 1280;
     baseSize.current = 800 * scale;
     const { current: base } = baseSize;
 
-    let params: paramsHuskyScript = {
+    const params: IParamsHuskyScript = {
+      // rations for the eye placement on the huskies face
       leftEyeBaseX: base * 0.088,
       leftEyeBaseY: base * 0.355,
       rightEyeBaseX: base * 0.285,
@@ -64,22 +70,25 @@ const Husky = ({ width }: IHuskyProps) => {
       scrollEyes: scrollEyes,
       baseSize: 800 * scale,
       addEvent,
-      addInterval,
+      addAnimation,
     };
-    let adjuster = huskyScript.bind(() => {})(params);
+    console.log('new use effect ran');
+    const husky = new HuskyObject(params);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // console.log(state, 'state update');
     return () => {
+      // console.log(state, 'cleanup state');
       for (let event of state.eventListeners) {
         document.removeEventListener('mousemove', event);
       }
-      if (!state.intervals.length) return;
-      for (let intervals of state.intervals) {
-        cancelAnimationFrame(intervals);
+      if (!state.animationFrames.length) return;
+      for (let animationInterrupt of state.animationFrames) {
+        animationInterrupt();
       }
     };
-  }, []);
+  }, [state]);
 
   return (
     <>

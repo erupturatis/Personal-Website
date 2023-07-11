@@ -1,9 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useWindowWidth from '@hooks/useWindowWidth';
-import Husky from './Husky';
 import styles from '@styles/hero.module.css';
 
-import { Montserrat, Questrial, Roboto } from 'next/font/google';
+import { Montserrat, Questrial } from 'next/font/google';
+import HuskyRenderWrapper from '@components/home/hero/HuskyRenderWrapper';
 
 const montserrat = Montserrat({
   weight: ['300', '400', '500', '600', '700'],
@@ -17,7 +17,7 @@ const questrial = Questrial({
   variable: '--font-questrial',
 });
 
-const Top = () => {
+const Hero = () => {
   const [word, setWord] = useState(true);
   const width = useWindowWidth();
 
@@ -26,10 +26,6 @@ const Top = () => {
       setWord((prev) => !prev);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
-
-  useLayoutEffect(() => {
-    console.log('useLayoutEffect', width.current);
   }, []);
 
   return (
@@ -97,28 +93,12 @@ const Top = () => {
               : ' flex  justify-center w-full z-0 relative pl-8'
           } `}
         >
-          {width.current > 0 && (
-            <>
-              {width.current > 1280 ? (
-                <>
-                  <Husky width={width} />
-                </>
-              ) : (
-                <div>
-                  <Husky width={width} />
-                  <div className='relative'>
-                    <div id={'huskyScrollTop'} className='absolute top-0'></div>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+          <HuskyRenderWrapper width={width.current} />
         </div>
       </>
-      <div className='w-full h-[800px]'>
-      </div>
+      <div className='w-full h-[800px]'></div>
     </div>
   );
 };
 
-export default Top;
+export default Hero;

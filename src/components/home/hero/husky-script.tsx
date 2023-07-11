@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-export type paramsHuskyScript = {
+export type IParamsHuskyScript = {
   leftEyeBaseX: number;
   leftEyeBaseY: number;
   rightEyeBaseX: number;
@@ -10,59 +8,110 @@ export type paramsHuskyScript = {
   rightEyeCenterOffsetX: number;
   rightEyeCenterOffsetY: number;
   scale: number;
-  addInterval: (newInterval: any) => void; // used to clear all intervals on exiting the page
+  addAnimation: (newAnimation: any) => void; // used to clear all intervals on exiting the page
   addEvent: (newEvent: any) => void; // used to clear all event listeners on exiting the page
-  scrollEyes?: boolean;
-  baseSize?: number;
+  scrollEyes: boolean;
+  baseSize: number;
   count?: number;
 };
 
-export function huskyScript(params: paramsHuskyScript) {
-  this.started = false;
-  const mouseCoordUpdate = (event: any) => {
+export class HuskyObject {
+  targetX: number = 0;
+  targetY: number = 0;
+  started: boolean;
+  leftEye: any;
+  rightEye: any;
+  params: IParamsHuskyScript;
+  rect: any;
+  svg: any;
+
+  constructor(params: IParamsHuskyScript) {
+    this.started = false;
+    this.params = params;
+    this.startProtocol();
+  }
+  mouseCoordinatesUpdates = (event: any) => {
     // get mouse position
     const mouseX = event.clientX;
     const mouseY = event.clientY;
-    this.mouseX = mouseX;
-    this.mouseY = mouseY;
+    this.targetX = mouseX;
+    this.targetY = mouseY;
+  };
+
+  scrollCoordinatesUpdater = () => {
+    const scrollY = window.scrollY;
+    this.targetY = scrollY + this.params.baseSize / 2;
+    this.targetX = window.innerWidth / 2;
+  };
+
+  startAnimation = () => {
     if (!this.started) {
       this.started = true;
-      let interval = requestAnimationFrame(loop);
-      params.addInterval(interval);
+      requestAnimationFrame(this.mainAnimationLoop);
+      this.params.addAnimation(() => {
+        this.started = false;
+      });
     }
   };
 
-  const scrollUpdater = () => {
-    const scrollY = window.scrollY;
-    this.mouseY = scrollY + params.baseSize / 2;
-    this.mouseX = window.innerWidth / 2;
+  addEventListenerWithReference(eventListener: any) {
+    document.addEventListener('mousemove', eventListener);
+    this.params.addEvent(eventListener);
+  }
+
+  startProtocol = () => {
+    this.svg = document.querySelector('#huskySvg');
+
+    const leftEye = document.querySelector('#lefteye');
+    const rightEye = document.querySelector('#righteye');
+
+    this.leftEye = leftEye;
+    this.rightEye = rightEye;
+
+    // selects based on param whether the eyes should follow the mouse or scroll
+    const scroll = this.params.scrollEyes;
+    const targetCoordinatesFunction = scroll
+      ? this.scrollCoordinatesUpdater
+      : this.mouseCoordinatesUpdates;
+    this.addEventListenerWithReference(targetCoordinatesFunction);
+    // starts the main animation loop
+    this.startAnimation();
   };
 
-  const loop = () => {
-    let rect = svg?.getBoundingClientRect();
+  mainAnimationLoop = () => {
+    if (!this.started) return;
+    let rect = this.svg?.getBoundingClientRect();
     this.rect = rect;
     // calculates vector from center of eyes to mouse
     const leftEyeX =
-      this.mouseX -
-      (params.leftEyeBaseX + params.leftEyeCenterOffsetX + this.rect.x);
+      this.targetX -
+      (this.params.leftEyeBaseX +
+        this.params.leftEyeCenterOffsetX +
+        this.rect.x);
     const leftEyeY =
-      this.mouseY -
-      (params.leftEyeBaseY + params.leftEyeCenterOffsetX + this.rect.y);
+      this.targetY -
+      (this.params.leftEyeBaseY +
+        this.params.leftEyeCenterOffsetX +
+        this.rect.y);
     const rightEyeX =
-      this.mouseX -
-      (params.rightEyeBaseX + params.rightEyeCenterOffsetX + this.rect.x);
+      this.targetX -
+      (this.params.rightEyeBaseX +
+        this.params.rightEyeCenterOffsetX +
+        this.rect.x);
     const rightEyeY =
-      this.mouseY -
-      (params.rightEyeBaseY + params.rightEyeCenterOffsetY + this.rect.y);
+      this.targetY -
+      (this.params.rightEyeBaseY +
+        this.params.rightEyeCenterOffsetY +
+        this.rect.y);
 
     // calculates angle of vector
     const leftEyeAngle = Math.atan2(leftEyeY, leftEyeX);
     const rightEyeAngle = Math.atan2(rightEyeY, rightEyeX);
 
     // calculates new eye position
-    let radiusLeft: number = 5 * params.scale;
-    let radiusRight: number = 10 * params.scale;
-    let movementSmoothing: number = 0.04;
+    let radiusLeft: number = 5 * this.params.scale;
+    let radiusRight: number = 10 * this.params.scale;
+    let movementSmoothing: number = 0.06;
 
     // calculates all displacements
     let leftEyeDisplacementX: number = Math.cos(leftEyeAngle) * radiusLeft;
@@ -70,10 +119,10 @@ export function huskyScript(params: paramsHuskyScript) {
     let rightEyeDisplacementX: number = Math.cos(rightEyeAngle) * radiusRight;
     let rightEyeDisplacementY: number = Math.sin(rightEyeAngle) * radiusRight;
 
-    const leftEyeExpectedX = params.leftEyeBaseX + leftEyeDisplacementX;
-    const leftEyeExpectedY = params.leftEyeBaseY + leftEyeDisplacementY;
-    const rightEyeExpectedX = params.rightEyeBaseX + rightEyeDisplacementX;
-    const rightEyeExpectedY = params.rightEyeBaseY + rightEyeDisplacementY;
+    const leftEyeExpectedX = this.params.leftEyeBaseX + leftEyeDisplacementX;
+    const leftEyeExpectedY = this.params.leftEyeBaseY + leftEyeDisplacementY;
+    const rightEyeExpectedX = this.params.rightEyeBaseX + rightEyeDisplacementX;
+    const rightEyeExpectedY = this.params.rightEyeBaseY + rightEyeDisplacementY;
 
     // getting current eye position
     const leftEyeCurrentX = parseFloat(this.leftEye.getAttribute('x'));
@@ -86,6 +135,7 @@ export function huskyScript(params: paramsHuskyScript) {
     const leftEyeDiffY = leftEyeExpectedY - leftEyeCurrentY;
     const rightEyeDiffX = rightEyeExpectedX - rightEyeCurrentX;
     const rightEyeDiffY = rightEyeExpectedY - rightEyeCurrentY;
+
     // calculates new eye position
     let leftEyeNewX = leftEyeCurrentX + leftEyeDiffX * movementSmoothing;
     let leftEyeNewY = leftEyeCurrentY + leftEyeDiffY * movementSmoothing;
@@ -98,32 +148,6 @@ export function huskyScript(params: paramsHuskyScript) {
     this.rightEye.setAttribute('x', rightEyeNewX.toString());
     this.rightEye.setAttribute('y', rightEyeNewY.toString());
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(this.mainAnimationLoop);
   };
-
-  let svg = document.querySelector('#huskySvg');
-
-  const leftEye = document.querySelector('#lefteye');
-  const rightEye = document.querySelector('#righteye');
-
-  this.leftEye = leftEye;
-  this.rightEye = rightEye;
-
-  if (params.scrollEyes) {
-    document.addEventListener('scroll', scrollUpdater);
-    const scrollY = window.scrollY;
-    this.mouseY = scrollY + params.baseSize / 2;
-    this.mouseX = window.innerWidth / 2;
-    let loopInt = requestAnimationFrame(loop);
-    params.addInterval(loopInt);
-  } else {
-    function addEventListenerWithReference() {
-      document.addEventListener('mousemove', mouseCoordUpdate);
-      return mouseCoordUpdate; // Return the listener function reference
-    }
-
-    let eListener = addEventListenerWithReference();
-    params.addEvent(eListener);
-  }
-  // start loop 60 frames per second
 }

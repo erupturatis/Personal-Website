@@ -1,6 +1,5 @@
 import React from 'react';
-import Skills from '@components/home/skills/Skills';
-import Top from '@components/home/hero/Top';
+import Hero from '@components/home/hero/Hero';
 
 export async function getStaticProps() {
   return { props: {} };
@@ -9,8 +8,8 @@ export async function getStaticProps() {
 const Home = ({}) => {
   return (
     <>
-      <Top />
-      <Skills />
+      <Hero />
+      {/*<Skills />*/}
     </>
   );
 };
