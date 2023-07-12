@@ -89,7 +89,8 @@ const Hero = () => {
         <div
           className={`  ${
             width.current > 1280
-              ? 'absolute 2xl:right-40 xl:right-20  hero-40'
+              ? 'absolute 2xl:right-40 xl:right-20  top-40  '
+                
               : ' flex  justify-center w-full z-0 relative pl-8'
           } `}
         >

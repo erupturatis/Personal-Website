@@ -1,5 +1,8 @@
-import React, { useEffect, useLayoutEffect, useReducer, useRef } from 'react';
-import { HuskyObject, IParamsHuskyScript } from './husky-script';
+import React, { useEffect, useReducer, useRef } from 'react';
+import {
+  HuskyObject,
+  IParamsHuskyScript,
+} from '@typescript/husky/husky-script';
 
 type IHuskyProps = {
   width: number;
@@ -72,14 +75,11 @@ const Husky = ({ width }: IHuskyProps) => {
       addEvent,
       addAnimation,
     };
-    console.log('new use effect ran');
     const husky = new HuskyObject(params);
   }, []);
 
-  useLayoutEffect(() => {
-    // console.log(state, 'state update');
+  useEffect(() => {
     return () => {
-      // console.log(state, 'cleanup state');
       for (let event of state.eventListeners) {
         document.removeEventListener('mousemove', event);
       }
@@ -89,6 +89,10 @@ const Husky = ({ width }: IHuskyProps) => {
       }
     };
   }, [state]);
+
+  const leftEyePath = '/husky/lefteye.webp';
+  const rightEyePath = '/husky/righteye.webp';
+  const huskyPath = '/husky/minihusky.webp';
 
   return (
     <>
@@ -102,16 +106,16 @@ const Husky = ({ width }: IHuskyProps) => {
           height={baseSize.current * 0.09}
           x={baseSize.current * 0.088}
           y={baseSize.current * 0.355}
-          xlinkHref='/lefteye.webp'
+          xlinkHref={leftEyePath}
         />
         <image
           id='righteye'
           height={baseSize.current * 0.08}
           x={baseSize.current * 0.285}
           y={baseSize.current * 0.358}
-          xlinkHref='/righteye.webp'
+          xlinkHref={rightEyePath}
         />
-        <image height={baseSize.current} xlinkHref='/minihusky.webp' />
+        <image height={baseSize.current} xlinkHref={huskyPath} />
       </svg>
     </>
   );
