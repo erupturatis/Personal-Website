@@ -53,9 +53,14 @@ const Husky = ({ width }: IHuskyProps) => {
   useEffect(() => {}, [state]);
   // for desktop screens
   useEffect(() => {
+    const boundedWidth = width > 1920 ? 1920 : width;
     const scale = // scale ratios for the husky
-      width > 1280 ? width / 1920 : width > 500 ? width / 1280 : width / 800;
-    const scrollEyes = width < 1280;
+      boundedWidth > 1280
+        ? boundedWidth / 1920
+        : boundedWidth > 500
+        ? boundedWidth / 1280
+        : boundedWidth / 800;
+    const scrollEyes = boundedWidth < 1280;
     baseSize.current = 800 * scale;
     const { current: base } = baseSize;
 

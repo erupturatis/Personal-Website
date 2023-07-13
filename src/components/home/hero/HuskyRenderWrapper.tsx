@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Husky from '@components/home/hero/Husky';
 
 type IHuskyRenderWrapperProps = {
@@ -7,9 +7,6 @@ type IHuskyRenderWrapperProps = {
 
 const HuskyRenderWrapper = ({ width }: IHuskyRenderWrapperProps) => {
   if (width === 0) return null;
-  useEffect(() => {
-    // console.log('rerender');
-  }, [width]);
 
   return (
     <div>

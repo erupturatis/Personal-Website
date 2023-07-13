@@ -34,3 +34,14 @@
 .colorNameInactive {
   background-position: left;
 }
+
+.light {
+  border-radius: 891px;
+  background: rgba(31, 150, 236, 0.75);
+  filter: blur(375px);
+
+  width: 891px;
+  height: 200px;
+  transform: rotate(-49.734deg);
+  flex-shrink: 0;
+}

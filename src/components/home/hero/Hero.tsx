@@ -35,11 +35,14 @@ const Hero = () => {
       >
         <div className='w-[350px] md:w-[500px] xl:w-[700px] '>
           <div
-            className={`${'roboto'} text-center opacity-60  font-light text-sm md:text-base mb-2 `}
+            className={
+              ` text-center opacity-60  text-sm md:text-xl mb-2 ` +
+              montserrat.className
+            }
           >
             Hi my name is
           </div>
-          <div className=' flex justify-center items-center mt-6 xl:mt-10 '>
+          <div className=' flex justify-center items-center mt-6 xl:mt-4 '>
             <div
               className={` text-center relative pb-2 text-3xl md:text-7xl font-bold`}
             >
@@ -72,7 +75,7 @@ const Hero = () => {
           </div>
           <div className=' flex relative justify-center w-full '>
             <div
-              className={`${questrial.className}  w-5/6  text-center opacity-90 mt-6 text-sm md:text-lg  `}
+              className={`${questrial.className}  w-full text-center opacity-90 mt-6 text-sm md:text-2xl`}
             >
               I am a passionate developer from europe who is always exploring
               new technologies and pushing the limits of what's possible
@@ -90,14 +93,12 @@ const Hero = () => {
           className={`  ${
             width.current > 1280
               ? 'absolute 2xl:right-40 xl:right-20  top-40  '
-                
               : ' flex  justify-center w-full z-0 relative pl-8'
           } `}
         >
           <HuskyRenderWrapper width={width.current} />
         </div>
       </>
-      <div className='w-full h-[800px]'></div>
     </div>
   );
 };
