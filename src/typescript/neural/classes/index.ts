@@ -215,7 +215,7 @@ export class BasePainter extends Params {
     this.distanceLayers = params.distanceLayers;
     this.distanceNeurons = params.distanceNeurons;
     // arranges existent neurons in layers
-    // the network will be centered around in the skills of the svg or group
+    // the network will be centered around in the interests of the svg or group
 
     // calculating X positions based on layerDistance
     let unit: number = params.distanceLayers;
