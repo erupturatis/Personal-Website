@@ -9,6 +9,20 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
+type IButtonProps = {
+  src: string;
+  alt: string;
+};
+const Button = ({ src, alt }: IButtonProps) => {
+  return (
+    <button
+      className={'transition-all duration-200 hover:translate-y-[-10px] '}
+    >
+      <Image src={src} alt={alt} width={75} height={75} />
+    </button>
+  );
+};
+
 const Contact = () => {
   const src = '/winter-theme/blueice.jpg';
   return (
@@ -34,38 +48,10 @@ const Contact = () => {
       </div>
 
       <div className={'flex justify-center gap-10 mt-20'}>
-        <button>
-          <Image
-            src={'/socials/linkedin.png'}
-            alt={'linkedin'}
-            width={75}
-            height={75}
-          />
-        </button>
-        <button>
-          <Image
-            src={'/socials/linkedin.png'}
-            alt={'linkedin'}
-            width={75}
-            height={75}
-          />
-        </button>
-        <button>
-          <Image
-            src={'/socials/linkedin.png'}
-            alt={'linkedin'}
-            width={75}
-            height={75}
-          />
-        </button>
-        <button>
-          <Image
-            src={'/socials/linkedin.png'}
-            alt={'linkedin'}
-            width={75}
-            height={75}
-          />
-        </button>
+        <Button src='/socials/linkedin.png' alt='linkedin' />
+        <Button src='/socials/linkedin.png' alt='linkedin' />
+        <Button src='/socials/linkedin.png' alt='linkedin' />
+        <Button src='/socials/linkedin.png' alt='linkedin' />
       </div>
     </div>
   );

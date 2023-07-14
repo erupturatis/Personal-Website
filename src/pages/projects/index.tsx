@@ -1,11 +1,14 @@
 import React from 'react';
+import BigProjectsList from '@components/projects/BigProjectsList';
+import SmallProjectsList from '@components/projects/SmallProjectsList';
 
-const projects = () => {
+const Projects = () => {
   return (
     <div>
-      <div className="text-white">projects page</div>
+      <BigProjectsList />
+      <SmallProjectsList />
     </div>
   );
 };
 
-export default projects;
+export default Projects;
