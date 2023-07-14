@@ -1,5 +1,6 @@
 import React from 'react';
 import SkillsGroup from '@components/home/skills/SkillsGroup';
+import Head from 'next/head';
 
 import { Montserrat } from 'next/font/google';
 
@@ -54,18 +55,21 @@ const Skills = () => {
 
   return (
     <>
-      <div
-        className={
-          'mt-72 mb-36 text-3xl text-white w-full text-center font-semibold  ' +
-          montserrat.className
-        }
-      >
-        Some of the skills I have include
+      <Head>
+        <meta name='description' content='My skills section description' />
+        <title>My Skills</title>
+      </Head>
+      <section className={'mt-72 mb-36'}>
+        <h2
+          className={`text-3xl text-white w-full text-center font-semibold ${montserrat.className}`}
+        >
+          Some of the skills I have include
+        </h2>
         <div className={'mt-4 text-lg text-center font-medium opacity-60'}>
           but are not limited to
         </div>
-      </div>
-      <div className={' flex flex-col gap-10'}>
+      </section>
+      <div className={'flex flex-col gap-10'}>
         <SkillsGroup type={'primary'} srcArray={primarySkillsSrc} />
         <SkillsGroup type={'secondary'} srcArray={secondarySkillsSrc} />
         <SkillsGroup type={'tertiary'} srcArray={tertiarySkillsSrc} />

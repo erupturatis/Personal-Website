@@ -73,19 +73,19 @@ const ConsoleBody = ({
 }) => {
   return (
     <a href={githubUrl}>
-      <div className={'w-full relative flex-grow'}>
-        <div className={'w-full flex text-xl justify-center text-white mt-4'}>
+      <section className={'w-full relative flex-grow'}>
+        <h2 className={'w-full flex text-xl justify-center text-white mt-4'}>
           ~ {title}
-        </div>
-        <div className={'ml-4'}>
-          <div className={'text-lg text-white text-opacity-60  '}>
+        </h2>
+        <section className={'ml-4'}>
+          <h3 className={'text-lg text-white text-opacity-60  '}>
             ./description
-          </div>
-          <div className={'text-md text-white text-opacity-40 mt-2'}>
+          </h3>
+          <h6 className={'text-md text-white text-opacity-40 mt-2'}>
             {description}
-          </div>
-        </div>
-      </div>
+          </h6>
+        </section>
+      </section>
     </a>
   );
 };
@@ -115,7 +115,7 @@ const BigProject = ({
   pictureUrl,
 }: IProject) => {
   return (
-    <div
+    <article
       className={
         'w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
       }
@@ -126,10 +126,10 @@ const BigProject = ({
         description={description}
         githubUrl={githubUrl}
       />
-      <div className={'absolute -bottom-56'}>
+      <section className={'absolute -bottom-56'}>
         <PhotoPreview pictureUrl={pictureUrl} />
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

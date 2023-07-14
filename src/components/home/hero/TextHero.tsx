@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import styles from '@styles/hero.module.css';
 
 import { Montserrat, Questrial } from 'next/font/google';
@@ -26,59 +27,65 @@ const TextHero = () => {
   }, []);
 
   return (
-    <div
-      className={` w-full flex justify-center xl:mt-72  xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}
-    >
-      <div className='w-[350px] md:w-[500px] xl:w-[700px] '>
-        <div
-          className={
-            ` text-center opacity-60  text-sm md:text-xl mb-2 ` +
-            montserrat.className
-          }
-        >
-          Hi my name is
-        </div>
-        <div className=' flex justify-center items-center mt-6 xl:mt-4 '>
-          <div
-            className={` text-center relative pb-2 text-3xl md:text-7xl font-bold`}
+    <>
+      <Head>
+        <meta
+          name='description'
+          content='Hi, this is my personal website description, I am a passionate developer from Europe'
+        />
+        <title>Barbulescu Eugen</title>
+      </Head>
+      <section
+        className={`w-full flex justify-center xl:mt-72 xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}
+      >
+        <div className={`w-[350px] md:w-[500px] xl:w-[700px]`}>
+          <h2
+            className={`text-center opacity-60 text-sm md:text-xl mb-2 ${montserrat.className}`}
           >
-            <div className='absolute top-5 w-full flex justify-center'>
-              <div
-                className={`h-5 w-full blur-[80px] bg-[#BFF2FF]  ${
-                  word ? `opacity-50` : `opacity-0`
-                } ${styles.colorName} ${
-                  word ? '' : styles.colorNameInactive
-                }  `}
-              ></div>
-            </div>
+            Hi my name is
+          </h2>
+          <div className={`flex justify-center items-center mt-6 xl:mt-4`}>
             <div
-              className={`${montserrat.className}
-              ${styles.colorName} ${word ? '' : styles.colorNameInactive}
-              `}
+              className={`text-center relative pb-2 text-3xl md:text-7xl font-bold`}
             >
-              Barbulescu
+              <div className={`absolute top-5 w-full flex justify-center`}>
+                <div
+                  className={`h-5 w-full blur-[80px] bg-[#BFF2FF] ${
+                    word ? `opacity-50` : `opacity-0`
+                  } ${styles.colorName} ${
+                    word ? '' : styles.colorNameInactive
+                  }`}
+                ></div>
+              </div>
+              <h1
+                className={`${montserrat.className} ${styles.colorName} ${
+                  word ? '' : styles.colorNameInactive
+                }`}
+              >
+                Barbulescu
+              </h1>
             </div>
+            <h1
+              className={`ml-3 xl:ml-6 ${
+                montserrat.className
+              } relative text-center text-3xl md:text-7xl font-bold pb-2 ${
+                styles.colorName
+              } ${!word ? '' : styles.colorNameInactive}`}
+            >
+              Eugen
+            </h1>
           </div>
-          <div
-            className={`${
-              montserrat.className
-            } relative text-center ml-3 xl:ml-6 text-3xl md:text-7xl font-bold pb-2  ${
-              styles.colorName
-            } ${!word ? '' : styles.colorNameInactive}`}
-          >
-            Eugen
+          <div className={`flex relative justify-center w-full`}>
+            <p
+              className={`${questrial.className} w-full text-center opacity-90 mt-6 text-sm md:text-2xl`}
+            >
+              I am a passionate developer from Europe who is always exploring
+              new technologies and pushing the limits of what's possible.
+            </p>
           </div>
         </div>
-        <div className=' flex relative justify-center w-full '>
-          <div
-            className={`${questrial.className}  w-full text-center opacity-90 mt-6 text-sm md:text-2xl`}
-          >
-            I am a passionate developer from europe who is always exploring new
-            technologies and pushing the limits of what's possible
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
