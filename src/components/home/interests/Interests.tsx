@@ -17,15 +17,18 @@ const Interests = () => {
           name='description'
           content='Interest section of my personal website, mathematics, MachineLearning and Programming'
         />
-        <title>My Interests</title>
       </Head>
-      <section className={'w-full mt-[500px]'}>
+      <section className={'w-full  xl:mt-[500px]'}>
         <h2
-          className={`text-3xl font-semibold text-white w-full text-center mt-24 ${montserrat.className}`}
+          className={`text-xl md:text-3xl font-semibold text-white w-full text-center mt-24 ${montserrat.className}`}
         >
           My main interests are
         </h2>
-        <div className={'w-full h-full flex justify-center gap-32 mt-24'}>
+        <div
+          className={
+            'w-full h-full flex flex-col xl:flex-row items-center justify-center gap-32 mt-24'
+          }
+        >
           <Card
             title={'Mathematics'}
             description={

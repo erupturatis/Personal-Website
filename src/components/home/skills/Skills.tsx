@@ -57,11 +57,10 @@ const Skills = () => {
     <>
       <Head>
         <meta name='description' content='My skills section description' />
-        <title>My Skills</title>
       </Head>
-      <section className={'mt-72 mb-36'}>
+      <section className={'mt-36 md:mt-72 mb-36'}>
         <h2
-          className={`text-3xl text-white w-full text-center font-semibold ${montserrat.className}`}
+          className={`text-xl md:text-3xl text-white w-full text-center font-semibold ${montserrat.className}`}
         >
           Some of the skills I have include
         </h2>

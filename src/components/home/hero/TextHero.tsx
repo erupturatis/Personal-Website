@@ -33,7 +33,6 @@ const TextHero = () => {
           name='description'
           content='Hi, this is my personal website description, I am a passionate developer from Europe'
         />
-        <title>Barbulescu Eugen</title>
       </Head>
       <section
         className={`w-full flex justify-center xl:mt-72 xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}
@@ -77,7 +76,7 @@ const TextHero = () => {
           </div>
           <div className={`flex relative justify-center w-full`}>
             <p
-              className={`${questrial.className} w-full text-center opacity-90 mt-6 text-sm md:text-2xl`}
+              className={`${questrial.className} w-full text-center opacity-90 px-2 xl:px-0 mt-6 text-sm md:text-2xl`}
             >
               I am a passionate developer from Europe who is always exploring
               new technologies and pushing the limits of what's possible.

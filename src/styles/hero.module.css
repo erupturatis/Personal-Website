@@ -35,6 +35,16 @@
   background-position: left;
 }
 
+.minifiedLight {
+  border-radius: 200px;
+  background: rgba(31, 150, 236, 0.75);
+  filter: blur(150px);
+  width: 200px;
+  height: 200px;
+  transform: rotate(-49.734deg);
+  flex-shrink: 0;
+}
+
 .light {
   border-radius: 891px;
   background: rgba(31, 150, 236, 0.75);

@@ -16,7 +16,6 @@ const HuskyRenderWrapper = ({ width }: IHuskyRenderWrapperProps) => {
           name='description'
           content='Hero section rendering the husky Head'
         />
-        <title>Husky hero section</title>
       </Head>
       <div>
         {width > 1280 ? (

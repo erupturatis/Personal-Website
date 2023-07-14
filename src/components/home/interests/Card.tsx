@@ -24,7 +24,7 @@ const Card = ({ title, description, color, tag }: ICardProps) => {
   return (
     <article
       ref={divRef}
-      className={`w-96 h-[500px] border-[1px] border-opacity-50 hover:border-opacity-100 group transition-opacity duration-200 rounded-2xl shadow-lg shadow-black ${
+      className={`w-72 md:w-96 h-[400px] md:h-[500px] border-[1px] border-opacity-50 hover:border-opacity-100 group transition-opacity duration-200 rounded-2xl shadow-lg shadow-black ${
         color === 'green'
           ? 'border-[#1fc26a]'
           : color === 'blue'
@@ -32,10 +32,10 @@ const Card = ({ title, description, color, tag }: ICardProps) => {
           : 'border-[#6511bb]'
       }`}
     >
-      <h3 className='text-white opacity-100 text-center text-3xl font-semibold mt-6'>
+      <h3 className='text-white opacity-100 text-center text-xl md:text-3xl font-semibold mt-6'>
         {title}
       </h3>
-      <p className='text-white text-xl text-center px-4 opacity-50 group-hover:opacity-75 transition-opacity duration-200 mt-20'>
+      <p className='text-white text-base md:text-xl text-center px-4 opacity-50 group-hover:opacity-75 transition-opacity duration-200 mt-20'>
         {description}
       </p>
     </article>

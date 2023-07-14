@@ -8,11 +8,12 @@ const Navbar = () => {
     <>
       <div className='hidden xl:block'>
         <Desktop />
+        <Moon positioning={'left'} />
       </div>
       <div className='xl:hidden'>
         <Mobile />
+        <Moon positioning={'center'} />
       </div>
-      <Moon positioning={'left'} />
     </>
   );
 };

@@ -7,15 +7,17 @@ type IMoonProps = {
 };
 
 const src = '/winter-theme/moon.png';
-const MoonCenter = () => {
+const MoonLeft = () => {
   return (
     <>
-      <div className={`absolute top-[-145px] right-[-145px] `}>
+      <div
+        className={`absolute top-[-145px] right-[0px] translate-x-[150px]  `}
+      >
         <Image src={src} alt={'Moon with socials'} width={300} height={300} />
       </div>
-      <div
-        className={'absolute top-[-200px] right-[-600px]  ' + styles.light}
-      ></div>
+      {/*<div*/}
+      {/*  className={'absolute top-[-200px] right-[-600px]  ' + styles.light}*/}
+      {/*/>*/}
       <div className={'absolute top-0 right-0  w-64 h-64 group'}>
         <div
           className={
@@ -46,27 +48,25 @@ const MoonCenter = () => {
   );
 };
 
-const MoonLeft = () => {
+const MoonCenter = () => {
   return (
-    <div className={`w-full flex justify-center `}>
-      <div className={'w-[300px] h-[300px] relative'}>
-        <div className={'absolute top-[-150px] left-[0px] '}>
-          <Image src={src} alt={'Moon with socials'} width={300} height={300} />
+    <section className={` relative w-full flex justify-center `}>
+      <div className={'w-[150px] h-[150px] relative'}>
+        <div className={'absolute top-[-85px] left-[0px] '}>
+          <Image src={src} alt={'Moon with socials'} width={150} height={150} />
         </div>
       </div>
-    </div>
+      <div className={'absolute top-[-100px] ' + styles.minifiedLight} />
+    </section>
   );
 };
 
 const Moon = ({ positioning }: IMoonProps) => {
   return (
-    <div className={`w-full  h-10 absolute top-0 `}>
-      <div className={`${positioning === 'center' ? 'block' : 'hidden'}`}>
-        <MoonLeft />
-      </div>
-      <div className={`${positioning === 'center' ? 'hidden' : 'block'}`}>
-        <MoonCenter />
-      </div>
+    <div
+      className={`w-full  h-10 absolute top-0 overflow-visible overflow-x-clip `}
+    >
+      {positioning === 'center' ? <MoonCenter /> : <MoonLeft />}
     </div>
   );
 };
