@@ -20,7 +20,7 @@ const ButtonDesktop = ({ text, link }: navButtonProps) => {
     <>
       <Link href={link}>
         <div
-          className={` ${kanit.className} relative py-2 text-xl first-letter:select-none  cursor-pointer transition-all text-white hover:text-blue-300  duration-500  opacity-80 hover:opacity-100 ease-in-200`}
+          className={` ${kanit.className} relative py-2 text-xl first-letter:select-none  cursor-pointer transition-all text-white hover:text-blue-300  duration-300 opacity-80 hover:opacity-100 ease-in-200`}
         >
           <div className={'text-center'}>{text}</div>
         </div>

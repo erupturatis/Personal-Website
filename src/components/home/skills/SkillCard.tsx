@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 type ISkillCardProps = {
   src: string;
@@ -12,16 +13,20 @@ const SkillCard = ({ src, type }: ISkillCardProps) => {
       ? 'w-24 h-24'
       : 'w-16 h-16';
 
-  const hoverSize =
-    type === 'primary'
-      ? 'w-40 h-40'
-      : type === 'secondary'
-      ? 'w-32 h-32'
-      : 'w-24 h-24';
+  const hoverSize = 'hover:scale-110';
 
   return (
-    <div className={'transition-all duration-200 ' + size + ' ' + hoverSize}>
-      <img src={src} alt={type + ' skill'} />
+    <div className={'transition-all duration-200   ' + size + ' ' + hoverSize}>
+      <div className={''}>
+        <Image
+          src={src}
+          alt='picture of the skill'
+          width={0}
+          height={0}
+          sizes='100vw'
+          style={{ width: '100%', height: '100%' }} // optional
+        />
+      </div>
     </div>
   );
 };

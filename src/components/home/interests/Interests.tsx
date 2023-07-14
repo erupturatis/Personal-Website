@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 
 const Interests = () => {
   return (
-    <div className={'w-full mt-96  '}>
+    <div className={'w-full mt-[500px]  '}>
       <div
         className={
           'text-3xl font-semibold text-white w-full text-center mt-24 ' +
@@ -32,7 +32,7 @@ const Interests = () => {
         <Card
           title={'Programming'}
           description={
-            'Programming was always in my life in some shape or form. I loved bringing ideas to life and pushing my boundaries. I ended up creating several visualizations and really interactive websites you can find in the projects section'
+            'Programming was always in my life in some shape or form. I loved bringing ideas to life and pushing my boundaries. I ended up creating several visualizations and interactive websites you can find in the projects section'
           }
           color={'purple'}
           tag={'Programming'}
