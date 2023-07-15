@@ -19,7 +19,12 @@ const Button = ({ src, alt }: IButtonProps) => {
     <button
       className={'transition-all duration-200 hover:translate-y-[-10px] '}
     >
-      <Image src={src} alt={alt} width={75} height={75} />
+      <div className={'hidden md:block'}>
+        <Image src={src} alt={alt} width={75} height={75} />
+      </div>
+      <div className={'block md:hidden'}>
+        <Image src={src} alt={alt} width={50} height={50} />
+      </div>
     </button>
   );
 };
@@ -43,7 +48,7 @@ const Contact = () => {
           Contact me
         </div>
         <div className={'w-full flex justify-center mt-10'}>
-          <div className={'rounded-full w-96 h-96 '}>
+          <div className={'rounded-full w-48 h-48 md:w-96 md:h-96 '}>
             <Image
               src={src}
               alt='picture of the skill'
@@ -55,7 +60,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className={'flex justify-center gap-10 mt-20'}>
+        <div className={'flex justify-center gap-5 md:gap-10 mt-20'}>
           <Button src='/socials/linkedin.png' alt='linkedin' />
           <Button src='/socials/linkedin.png' alt='linkedin' />
           <Button src='/socials/linkedin.png' alt='linkedin' />

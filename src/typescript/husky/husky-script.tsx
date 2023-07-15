@@ -54,8 +54,11 @@ export class HuskyObject {
     }
   };
 
-  addEventListenerWithReference(eventListener: any) {
-    document.addEventListener('mousemove', eventListener);
+  addEventListenerWithReference(
+    eventListener: any,
+    param: 'mousemove' | 'scroll'
+  ) {
+    document.addEventListener(param, eventListener);
     this.params.addEvent(eventListener);
   }
 
@@ -73,7 +76,13 @@ export class HuskyObject {
     const targetCoordinatesFunction = scroll
       ? this.scrollCoordinatesUpdater
       : this.mouseCoordinatesUpdates;
-    this.addEventListenerWithReference(targetCoordinatesFunction);
+
+    const targetCoordinateListenerParam = scroll ? 'scroll' : 'mousemove';
+
+    this.addEventListenerWithReference(
+      targetCoordinatesFunction,
+      targetCoordinateListenerParam
+    );
     // starts the main animation loop
     this.startAnimation();
   };

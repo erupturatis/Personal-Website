@@ -7,13 +7,9 @@ type ISkillsGroupProps = {
 };
 
 const SkillsGroup = ({ type, srcArray }: ISkillsGroupProps) => {
-  const gap = type === 'primary' ? 'gap-10' : 'gap-5';
+  const gap = type === 'primary' ? 'gap-5 lg:gap-10' : 'gap-3 md:gap-5';
   return (
-    <div
-      className={
-        'w-full  border-2 border-white text-white flex justify-center ' + gap
-      }
-    >
+    <div className={'w-full  text-white flex flex-wrap justify-center ' + gap}>
       {srcArray.map((src, index) => {
         return <SkillCard src={src} type={type} />;
       })}

@@ -3,7 +3,11 @@ import Link from 'next/link';
 
 const ButtonsBottom = () => {
   return (
-    <div className={'mt-20 flex gap-10 justify-center '}>
+    <div
+      className={
+        'mt-20 flex flex-col items-center md:flex-row  gap-10 justify-center '
+      }
+    >
       <Link href={'/projects'}>
         <button
           className={

@@ -25,9 +25,6 @@ const HuskyRenderWrapper = ({ width }: IHuskyRenderWrapperProps) => {
         ) : (
           <div>
             <Husky width={width} />
-            <div className='relative'>
-              <div id={'huskyScrollTop'} className='absolute top-0'></div>
-            </div>
           </div>
         )}
       </div>

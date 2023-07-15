@@ -8,10 +8,10 @@ type ISkillCardProps = {
 const SkillCard = ({ src, type }: ISkillCardProps) => {
   const size =
     type === 'primary'
-      ? 'w-8 h-8 lg:w-32 lg:h-32'
+      ? 'w-12 h-12 lg:w-32 lg:h-32'
       : type === 'secondary'
-      ? 'w-24 h-24'
-      : 'w-16 h-16';
+      ? 'w-8 h-8 lg:w-24 lg:h-24'
+      : 'w-6 h-6 lg:w-16 lg:h-16';
 
   const hoverSize = 'hover:scale-110';
 

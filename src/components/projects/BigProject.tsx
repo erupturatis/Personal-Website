@@ -30,16 +30,16 @@ const ConsoleNavbar = ({
         <div className={'w-4 h-4 rounded-full bg-green-500'} />
       </div>
       <div className={'h-10 w-[1px] bg-white bg-opacity-30 ml-4 '} />
-      <div
+      <h3
         className={
-          'text-lg text-white text-opacity-70  w-20 h-10 flex  justify-center items-center border-red-700'
+          'text-base md:text-lg text-white text-opacity-70  w-20 h-10 flex  justify-center items-center '
         }
       >
         bash
-      </div>
+      </h3>
 
       <div className={'h-10 w-[1px] bg-white bg-opacity-30  '} />
-      <div className={'absolute right-5    flex gap-6 '}>
+      <div className={'absolute right-5 flex gap-3 md:gap-6 '}>
         <a
           href={websiteUrl}
           className={'text-md text-white text-opacity-40 mt-2'}
@@ -74,14 +74,18 @@ const ConsoleBody = ({
   return (
     <a href={githubUrl}>
       <section className={'w-full relative flex-grow'}>
-        <h2 className={'w-full flex text-xl justify-center text-white mt-4'}>
+        <h2
+          className={
+            'w-full flex text-lg md:text-xl justify-center text-white mt-4'
+          }
+        >
           ~ {title}
         </h2>
         <section className={'ml-4'}>
-          <h3 className={'text-lg text-white text-opacity-60  '}>
+          <h3 className={'text-base lg:text-lg text-white text-opacity-60  '}>
             ./description
           </h3>
-          <h6 className={'text-md text-white text-opacity-40 mt-2'}>
+          <h6 className={'text-sm lg:text-md text-white text-opacity-40 mt-2'}>
             {description}
           </h6>
         </section>
@@ -94,7 +98,7 @@ const PhotoPreview = ({ pictureUrl }: { pictureUrl: string }) => {
   return (
     <div
       className={
-        ' opacity-0 transition-opacity duration-200 group-hover:opacity-100 '
+        ' opacity-0 transition-opacity duration-200 group-hover:opacity-100  '
       }
     >
       <Image
@@ -117,7 +121,7 @@ const BigProject = ({
   return (
     <article
       className={
-        'w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
+        ' w-[300px] lg:w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
       }
     >
       <ConsoleNavbar githubUrl={githubUrl} websiteUrl={websiteUrl} />
@@ -126,7 +130,7 @@ const BigProject = ({
         description={description}
         githubUrl={githubUrl}
       />
-      <section className={'absolute -bottom-56'}>
+      <section className={'absolute -bottom-56 hidden lg:block'}>
         <PhotoPreview pictureUrl={pictureUrl} />
       </section>
     </article>
