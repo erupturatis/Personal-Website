@@ -41,17 +41,6 @@ const ConsoleNavbar = ({
       <div className={'h-10 w-[1px] bg-white bg-opacity-30  '} />
       <div className={'absolute right-5 flex gap-3 md:gap-6 '}>
         <a
-          href={websiteUrl}
-          className={'text-md text-white text-opacity-40 mt-2'}
-        >
-          <Image
-            src={srcWebsiteLink}
-            alt={'Website Project Link'}
-            width={25}
-            height={25}
-          />
-        </a>
-        <a
           href={githubUrl}
           className={'text-md text-white text-opacity-40 mt-2'}
         >
@@ -90,6 +79,9 @@ const ConsoleBody = ({
         'visualize',
         'neural networks',
         'real-time',
+        'Neat',
+        'skills',
+        'Manim',
       ];
       const regex = new RegExp(importantWords.join('|'), 'g');
       return text.replace(
@@ -167,7 +159,7 @@ const BigProject = ({
       />
       <section
         className={
-          'absolute bottom-[-400px] z-20 hidden lg:block pointer-events-none'
+          'absolute bottom-[-400px]  z-20 hidden lg:block pointer-events-none'
         }
       >
         <PhotoPreview pictureUrl={pictureUrl} />

@@ -13,24 +13,37 @@ const montserrat = Montserrat({
 type IButtonProps = {
   src: string;
   alt: string;
+  link: string;
 };
-const Button = ({ src, alt }: IButtonProps) => {
+const Button = ({ src, alt, link }: IButtonProps) => {
   return (
     <button
       className={'transition-all duration-200 hover:translate-y-[-10px] '}
     >
-      <div className={'hidden md:block'}>
-        <Image src={src} alt={alt} width={75} height={75} />
-      </div>
-      <div className={'block md:hidden'}>
-        <Image src={src} alt={alt} width={50} height={50} />
-      </div>
+      <a href={link} className={'hidden md:block'}>
+        <Image
+          src={src}
+          alt={alt}
+          width={75}
+          height={75}
+          style={{ borderRadius: '15%' }}
+        />
+      </a>
+      <a href={link} className={'block md:hidden'}>
+        <Image
+          src={src}
+          alt={alt}
+          width={50}
+          height={50}
+          style={{ borderRadius: '15%' }}
+        />
+      </a>
     </button>
   );
 };
 
 const Contact = () => {
-  const src = '/winter-theme/blueice.jpg';
+  const src = '/socials/mePersonalWebsite.jpeg';
   return (
     <>
       <Head>
@@ -61,10 +74,16 @@ const Contact = () => {
         </div>
 
         <div className={'flex justify-center gap-5 md:gap-10 mt-20'}>
-          <Button src='/socials/linkedin.png' alt='linkedin' />
-          <Button src='/socials/linkedin.png' alt='linkedin' />
-          <Button src='/socials/linkedin.png' alt='linkedin' />
-          <Button src='/socials/linkedin.png' alt='linkedin' />
+          <Button
+            src='/socials/linkdin.png'
+            alt='linkedin'
+            link={'https://www.linkedin.com/in/eugen-barbulescu-33605327b/'}
+          />
+          <Button
+            src='/socials/gmail.png'
+            alt='gmail'
+            link={'mailto:barbulescu.eugeno@gmail.com'}
+          />
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ const SkillsGroup = ({ type, srcArray, srcPrefix }: ISkillsGroupProps) => {
   return (
     <div className={'w-full  text-white flex flex-wrap justify-center ' + gap}>
       {srcArray.map((src, index) => {
-        return <SkillCard src={`${srcPrefix}/${src}`} type={type} />;
+        return <SkillCard key={src} src={`${srcPrefix}/${src}`} type={type} />;
       })}
     </div>
   );

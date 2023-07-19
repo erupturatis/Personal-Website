@@ -48,7 +48,9 @@ const Interests = () => {
           />
           <Card
             title={'Machine Learning'}
-            description={'cea'}
+            description={
+              'Machine learning combines my two main interests, math and programming with the added benefit of philosophy and pragmatic thinking. It is a field I see most potential in and I see myself working in the future'
+            }
             color={'blue'}
             tag={'Machine Learning'}
           />
