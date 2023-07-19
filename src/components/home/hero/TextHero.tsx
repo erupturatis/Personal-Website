@@ -47,15 +47,6 @@ const TextHero = () => {
             <div
               className={`text-center relative pb-2 text-3xl md:text-7xl font-bold`}
             >
-              <div className={`absolute top-5 w-full flex justify-center`}>
-                <div
-                  className={`h-5 w-full blur-[80px] bg-[#BFF2FF] ${
-                    word ? `opacity-50` : `opacity-0`
-                  } ${styles.colorName} ${
-                    word ? '' : styles.colorNameInactive
-                  }`}
-                ></div>
-              </div>
               <h1
                 className={`${montserrat.className} ${styles.colorName} ${
                   word ? '' : styles.colorNameInactive

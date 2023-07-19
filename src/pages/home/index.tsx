@@ -1,13 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
-import Hero from '@components/home/hero/Hero';
-import Interests from '@components/home/interests/Interests';
-import Skills from '@components/home/skills/Skills';
-import ButtonsBottom from '@components/home/ButtonsBottom';
+import dynamic from 'next/dynamic';
 
 export async function getStaticProps() {
   return { props: {} };
 }
+
+const Hero = dynamic(() => import('@components/home/hero/Hero'));
+const Interests = dynamic(() => import('@components/home/interests/Interests'));
+const Skills = dynamic(() => import('@components/home/skills/Skills'));
+const ButtonsBottom = dynamic(() => import('@components/home/ButtonsBottom'));
 
 const Home = () => {
   return (
@@ -17,7 +19,6 @@ const Home = () => {
           name='description'
           content='Personal website showcasing projects and portfolio'
         />
-
         <title>Home</title>
       </Head>
       <Hero />
