@@ -6,44 +6,99 @@ type IMoonProps = {
   positioning: 'center' | 'left';
 };
 
-const src = '/winter-theme/moon.png';
+const moonSrc = '/winter-theme/moon.png';
+const firstSocialSrc = '/socials/linkdin.png';
+const secondSocialSrc = '/socials/gmail.png';
+const githubMoonSrc = '/socials/githubmoon.png';
+
 const MoonLeft = () => {
   return (
     <>
       <div
-        className={`absolute top-[-145px] right-[0px] translate-x-[150px]  `}
+        className={`absolute top-[-145px] right-[0px] translate-x-[150px] z-20 group pointer-events-auto `}
       >
-        <Image src={src} alt={'Moon with socials'} width={300} height={300} />
-      </div>
-      {/*<div*/}
-      {/*  className={'absolute top-[-200px] right-[-600px]  ' + styles.light}*/}
-      {/*/>*/}
-      <div className={'absolute top-0 right-0  w-64 h-64 group'}>
-        <div
-          className={
-            'absolute top-28 right-8 w-[100px] h-[100px] opacity-30 transition-all duration-200 group-hover:opacity-100 group-hover:top-32 group-hover:right-10'
-          }
-        >
+        <div className={'relative '}>
           <Image
-            src={src}
-            alt={'Mini moon with first social'}
-            width={75}
-            height={75}
+            src={moonSrc}
+            alt={'Moon with socials'}
+            width={300}
+            height={300}
           />
         </div>
         <div
           className={
-            'absolute top-8 right-28 w-[100px] h-[100px] opacity-30 transition-all duration-200 group-hover:opacity-100 group-hover:top-10 group-hover:right-32'
+            'absolute bottom-16 left-16 w-12 h-12 bg-black blur-lg opacity-60'
           }
+        />
+        <a
+          href={'https://github.com/erupturatis'}
+          className={'absolute bottom-12 left-12 z-50 pointer-events-auto '}
         >
           <Image
-            src={src}
-            alt={'Mini moon with first social'}
-            width={75}
-            height={75}
+            src={githubMoonSrc}
+            alt={'Moon with socials'}
+            width={90}
+            height={90}
           />
+        </a>
+
+        {/*minimoons*/}
+
+        <div
+          className={
+            'absolute bottom-[-126px] left-[-108px]  w-64 h-64 pointer-events-auto '
+          }
+        >
+          <a
+            className={
+              'absolute top-28 select-none right-8 w-[100px] h-[100px] opacity-30 transition-all duration-200 group-hover:opacity-100 group-hover:top-32 group-hover:right-10'
+            }
+            href={'https://www.linkedin.com/in/eugen-barbulescu-33605327b/'}
+          >
+            <Image
+              src={moonSrc}
+              alt={'Mini moon with first social'}
+              width={75}
+              height={75}
+            />
+            <div className={'absolute bottom-[45px] left-[20px] '}>
+              <Image
+                src={firstSocialSrc}
+                alt={'Mini moon with first social'}
+                width={35}
+                height={35}
+                style={{ borderRadius: '10%' }}
+              />
+            </div>
+          </a>
+          <a
+            className={
+              'absolute top-8 right-28 select-none w-[100px] h-[100px] opacity-30 transition-all duration-200 group-hover:opacity-100 group-hover:top-10 group-hover:right-32'
+            }
+            href={'mailto:barbulescu.eugeno@gmail.com'}
+          >
+            <Image
+              src={moonSrc}
+              alt={'Mini moon with first social'}
+              width={75}
+              height={75}
+            />
+
+            <div className={'absolute bottom-[45px] left-[20px] '}>
+              <Image
+                src={secondSocialSrc}
+                alt={'Mini moon with first social'}
+                width={35}
+                height={35}
+                style={{ borderRadius: '10%' }}
+              />
+            </div>
+          </a>
         </div>
       </div>
+      <div
+        className={'absolute top-[-200px] right-[-600px]  ' + styles.light}
+      />
     </>
   );
 };
@@ -53,7 +108,12 @@ const MoonCenter = () => {
     <section className={` relative w-full flex justify-center `}>
       <div className={'w-[150px] h-[150px] relative'}>
         <div className={'absolute top-[-85px] left-[0px] '}>
-          <Image src={src} alt={'Moon with socials'} width={150} height={150} />
+          <Image
+            src={moonSrc}
+            alt={'Moon with socials'}
+            width={150}
+            height={150}
+          />
         </div>
       </div>
       <div className={'absolute top-[-100px] ' + styles.minifiedLight} />

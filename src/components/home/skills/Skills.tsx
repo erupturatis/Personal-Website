@@ -12,45 +12,48 @@ const montserrat = Montserrat({
 
 const Skills = () => {
   const primarySkillsSrc: string[] = [
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
+    'javascript.png',
+    'typescript.png',
+    'react.png',
+    'nextjs.png',
+    'nodejs.png',
+    'html.png',
+    'css.png',
+    'python.png',
+    'astrojs.png',
+    'express.png',
+    'photoshop.png',
+    'figma.png',
   ];
   const secondarySkillsSrc: string[] = [
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
+    'bash.png',
+    'Csharp.png',
+    'C++.png',
+    'd3js.png',
+    'git.png',
+    'linux.png',
+    'mongodb.png',
+    'pytorch.png',
+    'sql.png',
+    'svelte.png',
+    'unity.png',
   ];
   const tertiarySkillsSrc: string[] = [
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
-    '/socials/linkedin.png',
+    'animejs.png',
+    'framerMotion.png',
+    'githubActions.png',
+    'jest.png',
+    'matplotlib.png',
+    'mySql.png',
+    'numpy.png',
+    'openCv.png',
+    'playwright.png',
+    'tailwind.png',
+    'threejs.png',
+    'vhdl.png',
+    'vim.png',
+    'vite.png',
+    'vitest.png',
   ];
 
   return (
@@ -69,9 +72,21 @@ const Skills = () => {
         </div>
       </section>
       <div className={'flex flex-col gap-10 px-3'}>
-        <SkillsGroup type={'primary'} srcArray={primarySkillsSrc} />
-        <SkillsGroup type={'secondary'} srcArray={secondarySkillsSrc} />
-        <SkillsGroup type={'tertiary'} srcArray={tertiarySkillsSrc} />
+        <SkillsGroup
+          srcPrefix={'/skills/primary'}
+          type={'primary'}
+          srcArray={primarySkillsSrc}
+        />
+        <SkillsGroup
+          srcPrefix={'/skills/secondary'}
+          type={'secondary'}
+          srcArray={secondarySkillsSrc}
+        />
+        <SkillsGroup
+          srcPrefix={'/skills/tertiary'}
+          type={'tertiary'}
+          srcArray={tertiarySkillsSrc}
+        />
       </div>
     </>
   );

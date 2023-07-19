@@ -16,7 +16,7 @@ const SkillCard = ({ src, type }: ISkillCardProps) => {
   const hoverSize = 'hover:scale-110';
 
   return (
-    <div className={'transition-all duration-200   ' + size + ' ' + hoverSize}>
+    <div className={'transition-all duration-200 ' + size + ' ' + hoverSize}>
       <div className={''}>
         <Image
           src={src}
@@ -24,7 +24,7 @@ const SkillCard = ({ src, type }: ISkillCardProps) => {
           width={0}
           height={0}
           sizes='100vw'
-          style={{ width: '100%', height: '100%' }} // optional
+          style={{ width: '100%', height: '100%', borderRadius: '15%' }} // optional
         />
       </div>
     </div>

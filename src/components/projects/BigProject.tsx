@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 type IProject = {
@@ -71,6 +71,39 @@ const ConsoleBody = ({
   description: string;
   githubUrl: string;
 }) => {
+  const [highlightedDescription, setHighlightedDescription] =
+    useState(description);
+
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // highlights important words
+    const highlight = (text: string) => {
+      const importantWords = [
+        'community-driven',
+        'roadmaps',
+        'editor',
+        'visualized',
+        'interactive',
+        'customize,',
+        'train',
+        'visualize',
+        'neural networks',
+        'real-time',
+      ];
+      const regex = new RegExp(importantWords.join('|'), 'g');
+      return text.replace(
+        regex,
+        (match) => `<span class="text-red-600 font-bold">${match}</span>`
+      );
+    };
+    const newDescription = highlight(description);
+    const descriptionElement = descriptionRef.current;
+    if (!descriptionElement) return;
+    descriptionElement.innerHTML = newDescription;
+    setHighlightedDescription(newDescription);
+  }, []);
+
   return (
     <a href={githubUrl}>
       <section className={'w-full relative flex-grow'}>
@@ -82,10 +115,12 @@ const ConsoleBody = ({
           ~ {title}
         </h2>
         <section className={'ml-4'}>
-          <h3 className={'text-base lg:text-lg text-white text-opacity-60  '}>
-            ./description
-          </h3>
-          <h6 className={'text-sm lg:text-md text-white text-opacity-40 mt-2'}>
+          <h6
+            ref={descriptionRef}
+            className={
+              'text-sm lg:text-lg pr-2 text-white text-opacity-70 mt-6'
+            }
+          >
             {description}
           </h6>
         </section>
@@ -98,14 +133,14 @@ const PhotoPreview = ({ pictureUrl }: { pictureUrl: string }) => {
   return (
     <div
       className={
-        ' opacity-0 transition-opacity duration-200 group-hover:opacity-100  '
+        'w-[300px] lg:w-[550px] h-96 opacity-0 z-10 transition-opacity duration-200 group-hover:opacity-100  '
       }
     >
       <Image
         src={pictureUrl}
         alt={'Picture of the project'}
-        height={550}
-        width={324}
+        fill={true}
+        style={{ objectFit: 'cover' }}
       />
     </div>
   );
@@ -121,7 +156,7 @@ const BigProject = ({
   return (
     <article
       className={
-        ' w-[300px] lg:w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
+        'w-[300px] lg:w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
       }
     >
       <ConsoleNavbar githubUrl={githubUrl} websiteUrl={websiteUrl} />
@@ -130,7 +165,11 @@ const BigProject = ({
         description={description}
         githubUrl={githubUrl}
       />
-      <section className={'absolute -bottom-56 hidden lg:block'}>
+      <section
+        className={
+          'absolute bottom-[-400px] z-20 hidden lg:block pointer-events-none'
+        }
+      >
         <PhotoPreview pictureUrl={pictureUrl} />
       </section>
     </article>
