@@ -32,7 +32,7 @@ const Home = () => {
     }, 100);
     setTimeout(() => {
       setLoadInterests(true);
-    }, 600);
+    }, 200);
     setTimeout(() => {
       setLoadNotVisible(true);
     }, 1000);
