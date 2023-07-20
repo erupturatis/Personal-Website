@@ -5,7 +5,9 @@ import React from 'react';
 const moonSrc = '/winter-theme/moon.png';
 const MoonCenter = () => {
   return (
-    <section className={` relative w-full flex justify-center `}>
+    <section
+      className={` relative animate-fade-in w-full flex justify-center `}
+    >
       <div className={'w-[150px] h-[150px] relative'}>
         <div className={'absolute top-[-85px] left-[0px] '}>
           <Image

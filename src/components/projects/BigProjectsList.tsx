@@ -32,6 +32,7 @@ const BigProjectsList = () => {
       {bigProjectListL.map((project) => {
         return (
           <BigProject
+            key={project.title}
             title={project.title}
             description={project.description}
             githubUrl={project.githubUrl}

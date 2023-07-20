@@ -53,8 +53,8 @@ const TextHero = () => {
               className={`text-center relative pb-2 text-3xl md:text-7xl font-bold`}
             >
               <h1
-                className={`${montserrat.className} ${styles.colorName1} ${
-                  word ? '' : styles.colorNameInactive1
+                className={`${montserrat.className} ${styles.colorName} ${
+                  word ? '' : styles.colorNameInactive
                 }`}
               >
                 Barbulescu
@@ -64,8 +64,8 @@ const TextHero = () => {
               className={`ml-3 xl:ml-6 ${
                 montserrat.className
               } relative text-center text-3xl md:text-7xl font-bold pb-2 ${
-                styles.colorName1
-              } ${!word ? '' : styles.colorNameInactive1}`}
+                styles.colorName
+              } ${!word ? '' : styles.colorNameInactive}`}
             >
               Eugen
             </h1>
