@@ -28,10 +28,10 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoadInterests(true);
-    }, 100);
+    }, 400);
     setTimeout(() => {
       setLoadNotVisible(true);
-    }, 300);
+    }, 600);
   }, []);
 
   return (
