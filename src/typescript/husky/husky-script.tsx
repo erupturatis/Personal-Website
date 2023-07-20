@@ -1,4 +1,4 @@
-export type IParamsHuskyScript = {
+type IParamsHuskyScript = {
   leftEyeBaseX: number;
   leftEyeBaseY: number;
   rightEyeBaseX: number;

@@ -16,8 +16,8 @@ const Hero = () => {
   const [textHero, setTextHero] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setRenderHusky(false);
-    }, 100);
+      setRenderHusky(true);
+    }, 300);
   }, []);
 
   return (
@@ -34,14 +34,10 @@ const Hero = () => {
           className={`  ${
             width.current > 1280
               ? 'absolute 2xl:right-40 xl:right-20  top-40  '
-              : ' flex  justify-center w-full z-0 relative pl-8'
+              : ' h-[400px] flex justify-center w-full z-0 relative pl-8'
           } `}
         >
-          {renderHusky ? (
-            <HuskyRenderWrapper width={width.current} />
-          ) : (
-            <div className={'w-64 h-[500px]'}></div>
-          )}
+          {renderHusky && <HuskyRenderWrapper width={width.current} />}
         </div>
       </div>
     </>

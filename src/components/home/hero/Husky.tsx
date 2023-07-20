@@ -1,8 +1,21 @@
-import React, { useEffect, useReducer, useRef } from 'react';
-import {
-  HuskyObject,
-  IParamsHuskyScript,
-} from '@typescript/husky/husky-script';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
+
+type IParamsHuskyScript = {
+  leftEyeBaseX: number;
+  leftEyeBaseY: number;
+  rightEyeBaseX: number;
+  rightEyeBaseY: number;
+  leftEyeCenterOffsetX: number;
+  leftEyeCenterOffsetY: number;
+  rightEyeCenterOffsetX: number;
+  rightEyeCenterOffsetY: number;
+  scale: number;
+  addAnimation: (newAnimation: any) => void; // used to clear all intervals on exiting the page
+  addEvent: (newEvent: any) => void; // used to clear all event listeners on exiting the page
+  scrollEyes: boolean;
+  baseSize: number;
+  count?: number;
+};
 
 type IHuskyProps = {
   width: number;
@@ -41,6 +54,7 @@ const reducer = (
 const Husky = ({ width }: IHuskyProps) => {
   // standard size is 800x800
   const baseSize = useRef(0);
+  const [triggerRender, setTriggerRender] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   // keeps track of event listeners and intervals sed in the husky
   const addAnimation = (newAnimation: any) => {
@@ -50,7 +64,31 @@ const Husky = ({ width }: IHuskyProps) => {
     dispatch({ type: 'ADD_LISTENER', payload: newEvent });
   };
 
-  useEffect(() => {}, [state]);
+  function addEyeFollowingBehavior(boundedWidth: number, scale: number) {
+    // dynamic imports, don't overload initial page load
+    import('@typescript/husky/husky-script').then(({ HuskyObject }) => {
+      const scrollEyes = boundedWidth < 1280;
+      const { current: base } = baseSize;
+
+      const params: IParamsHuskyScript = {
+        // rations for the eye placement on the huskies face
+        leftEyeBaseX: base * 0.088,
+        leftEyeBaseY: base * 0.355,
+        rightEyeBaseX: base * 0.285,
+        rightEyeBaseY: base * 0.358,
+        leftEyeCenterOffsetX: base * 0.05,
+        leftEyeCenterOffsetY: base * 0.045,
+        rightEyeCenterOffsetX: base * 0.05,
+        rightEyeCenterOffsetY: base * 0.035,
+        scale: scale,
+        scrollEyes: scrollEyes,
+        baseSize: 800 * scale,
+        addEvent,
+        addAnimation,
+      };
+      new HuskyObject(params);
+    });
+  }
   // for desktop screens
   useEffect(() => {
     const boundedWidth = width > 1920 ? 1920 : width;
@@ -62,25 +100,13 @@ const Husky = ({ width }: IHuskyProps) => {
         : boundedWidth / 800;
     const scrollEyes = boundedWidth < 1280;
     baseSize.current = 800 * scale;
-    const { current: base } = baseSize;
+    setTriggerRender((prev) => !prev);
 
-    const params: IParamsHuskyScript = {
-      // rations for the eye placement on the huskies face
-      leftEyeBaseX: base * 0.088,
-      leftEyeBaseY: base * 0.355,
-      rightEyeBaseX: base * 0.285,
-      rightEyeBaseY: base * 0.358,
-      leftEyeCenterOffsetX: base * 0.05,
-      leftEyeCenterOffsetY: base * 0.045,
-      rightEyeCenterOffsetX: base * 0.05,
-      rightEyeCenterOffsetY: base * 0.035,
-      scale: scale,
-      scrollEyes: scrollEyes,
-      baseSize: 800 * scale,
-      addEvent,
-      addAnimation,
-    };
-    const husky = new HuskyObject(params);
+    console.log('base size is 800');
+
+    setTimeout(() => {
+      addEyeFollowingBehavior(boundedWidth, scale);
+    }, 200);
   }, []);
 
   useEffect(() => {

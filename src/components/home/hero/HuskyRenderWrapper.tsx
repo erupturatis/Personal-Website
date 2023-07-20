@@ -18,15 +18,7 @@ const HuskyRenderWrapper = ({ width }: IHuskyRenderWrapperProps) => {
         />
       </Head>
       <div>
-        {width > 1280 ? (
-          <>
-            <Husky width={width} />
-          </>
-        ) : (
-          <div>
-            <Husky width={width} />
-          </div>
-        )}
+        <Husky width={width} />
       </div>
     </>
   );

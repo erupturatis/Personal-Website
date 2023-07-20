@@ -18,7 +18,7 @@ const Interests = () => {
           content='Interest section of my personal website, mathematics, MachineLearning and Programming'
         />
       </Head>
-      <section className={'w-full  xl:mt-[500px]'}>
+      <section className={'w-full xl:mt-[500px]'}>
         <h2
           className={`text-xl md:text-3xl font-semibold text-white w-full text-center mt-24 ${montserrat.className}`}
         >
