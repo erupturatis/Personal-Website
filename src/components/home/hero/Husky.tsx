@@ -132,6 +132,13 @@ const Husky = ({ width }: IHuskyProps) => {
 
   return (
     <div className={'opacity-0'} ref={ref}>
+      <div
+        className={
+          'absolute -bottom-0 left-[50%]  xl:-rotate-45 xl:-left-40 xl:bottom-64 text-lg xl:text-2xl text-white'
+        }
+      >
+        I also love huskies
+      </div>
       <svg
         id='huskySvg'
         width={(baseSize.current * 2) / 3}

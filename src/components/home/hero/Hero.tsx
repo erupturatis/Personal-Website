@@ -39,7 +39,7 @@ const Hero = () => {
           className={`  ${
             width.current > 1280
               ? 'absolute 2xl:right-40 xl:right-20  top-40  '
-              : ' h-[400px] flex justify-center w-full z-0 relative pl-8'
+              : '  flex justify-center w-full z-0 relative pl-8'
           } `}
         >
           {renderHusky && <HuskyRenderWrapper width={width.current} />}

@@ -19,6 +19,7 @@ const SkillCard = ({ src, type, callback }: ISkillCardProps) => {
   return (
     <div className={'transition-all duration-200 ' + size + ' ' + hoverSize}>
       <button
+        className={'w-full h-full'}
         onClick={() => {
           callback(src);
         }}
