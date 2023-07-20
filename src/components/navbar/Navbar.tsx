@@ -19,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoadMoon(true);
-    }, 200);
+    }, 150);
   }, []);
 
   return (

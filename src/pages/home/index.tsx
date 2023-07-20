@@ -31,7 +31,7 @@ const Home = () => {
     }, 100);
     setTimeout(() => {
       setLoadNotVisible(true);
-    }, 1000);
+    }, 500);
   }, []);
 
   return (

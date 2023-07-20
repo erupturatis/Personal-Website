@@ -40,7 +40,7 @@ const TextHero = () => {
         />
       </Head>
       <section
-        className={`w-full flex justify-center xl:mt-72 xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}
+        className={`w-full flex animate-fade-in justify-center xl:mt-72 xl:pl-32 2xl:pl-64 xl:justify-start mb-10 mt-24 text-white text-xl`}
       >
         <div className={`w-[350px] md:w-[500px] xl:w-[700px]`}>
           <h2

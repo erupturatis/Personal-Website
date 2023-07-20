@@ -11,7 +11,7 @@ const MoonLeft = () => {
   return (
     <>
       <div
-        className={`absolute top-[-145px] right-[0px] translate-x-[150px] z-20 group pointer-events-auto `}
+        className={`absolute animate-fade-in top-[-145px] right-[0px] translate-x-[150px] z-20 group pointer-events-auto `}
       >
         <div className={'relative '}>
           <Image

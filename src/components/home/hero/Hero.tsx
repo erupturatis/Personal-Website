@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useWindowWidth from '@hooks/useWindowWidth';
-import HuskyRenderWrapper from '@components/home/hero/HuskyRenderWrapper';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import TextHero from '@components/home/hero/TextHero';
 
-const HuskyRendererWrapper = dynamic(
+const HuskyRenderWrapper = dynamic(
   () => import('@components/home/hero/HuskyRenderWrapper'),
   {
     ssr: false,
@@ -23,7 +22,7 @@ const Hero = () => {
     }, 100);
     setTimeout(() => {
       setRenderHusky(true);
-    }, 300);
+    }, 200);
   }, []);
 
   return (
@@ -34,7 +33,7 @@ const Hero = () => {
           content='Personal website showcasing projects and portfolio'
         />
       </Head>
-      <div>
+      <div className={' absolute w-full h-[600px] top-20'}>
         {textHero && <TextHero />}
         <div
           className={`  ${
