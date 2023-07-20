@@ -43,7 +43,7 @@ const Home = () => {
         />
         <title>Home</title>
       </Head>
-      {/*<Hero />*/}
+      <Hero />
       {loadInterests && <Interests />}
       {loadNotVisible && <Skills />}
       {loadNotVisible && <ButtonsBottom />}
