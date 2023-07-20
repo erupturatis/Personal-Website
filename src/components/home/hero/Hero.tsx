@@ -22,7 +22,7 @@ const Hero = () => {
       setTextHero(true);
     }, 100);
     setTimeout(() => {
-      setRenderHusky(false);
+      setRenderHusky(true);
     }, 300);
   }, []);
 
