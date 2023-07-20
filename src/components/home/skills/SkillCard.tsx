@@ -4,8 +4,9 @@ import Image from 'next/image';
 type ISkillCardProps = {
   src: string;
   type: 'primary' | 'secondary' | 'tertiary';
+  callback: (src: string) => void;
 };
-const SkillCard = ({ src, type }: ISkillCardProps) => {
+const SkillCard = ({ src, type, callback }: ISkillCardProps) => {
   const size =
     type === 'primary'
       ? 'w-12 h-12 lg:w-32 lg:h-32'
@@ -17,7 +18,14 @@ const SkillCard = ({ src, type }: ISkillCardProps) => {
 
   return (
     <div className={'transition-all duration-200 ' + size + ' ' + hoverSize}>
-      <div className={''}>
+      <button
+        onClick={() => {
+          callback(src);
+        }}
+        onMouseEnter={() => {
+          callback(src);
+        }}
+      >
         <Image
           src={src}
           alt='picture of the skill'
@@ -26,7 +34,7 @@ const SkillCard = ({ src, type }: ISkillCardProps) => {
           sizes='100vw'
           style={{ width: '100%', height: '100%', borderRadius: '15%' }} // optional
         />
-      </div>
+      </button>
     </div>
   );
 };

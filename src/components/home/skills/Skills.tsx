@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SkillsGroup from '@components/home/skills/SkillsGroup';
 import Head from 'next/head';
 
@@ -11,6 +11,14 @@ const montserrat = Montserrat({
 });
 
 const Skills = () => {
+  const [skill, setSkill] = useState('');
+  function setSkillToDisplay(skill: string) {
+    // trims last 4 characters (the file extension)
+    skill = skill.slice(0, -4);
+    // cut the string up to the last slash
+    skill = skill.slice(skill.lastIndexOf('/') + 1);
+    setSkill(skill);
+  }
   const primarySkillsSrc: string[] = [
     'javascript.png',
     'typescript.png',
@@ -67,22 +75,29 @@ const Skills = () => {
         >
           Some of the skills I have include
         </h2>
-        <div className={'mt-4 text-lg text-center font-medium opacity-60'}>
-          but are not limited to
+        <div
+          className={
+            'mt-4 text-white h-10 text-sm md:text-lg text-center font-medium opacity-60'
+          }
+        >
+          {skill}
         </div>
       </section>
       <div className={'flex flex-col gap-10 px-3'}>
         <SkillsGroup
+          callback={setSkillToDisplay}
           srcPrefix={'/skills/primary'}
           type={'primary'}
           srcArray={primarySkillsSrc}
         />
         <SkillsGroup
+          callback={setSkillToDisplay}
           srcPrefix={'/skills/secondary'}
           type={'secondary'}
           srcArray={secondarySkillsSrc}
         />
         <SkillsGroup
+          callback={setSkillToDisplay}
           srcPrefix={'/skills/tertiary'}
           type={'tertiary'}
           srcArray={tertiarySkillsSrc}
