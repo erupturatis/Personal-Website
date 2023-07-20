@@ -16,7 +16,7 @@ const Hero = () => {
   const [textHero, setTextHero] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setRenderHusky(true);
+      setRenderHusky(false);
     }, 100);
   }, []);
 
