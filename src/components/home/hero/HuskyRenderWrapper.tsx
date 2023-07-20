@@ -17,9 +17,8 @@ const HuskyRenderWrapper = ({ width }: IHuskyRenderWrapperProps) => {
           content='Hero section rendering the husky Head'
         />
       </Head>
-      <div className={'animate-fade-in'}>
-        <Husky width={width} />
-      </div>
+
+      <Husky width={width} />
     </>
   );
 };

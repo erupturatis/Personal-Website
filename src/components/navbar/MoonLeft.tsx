@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from '@styles/hero.module.css';
-import React from 'react';
+import React, { useRef } from 'react';
+import { startFadeIn } from '@typescript/misc';
 
 const moonSrc = '/winter-theme/moon.png';
 const firstSocialSrc = '/socials/linkdin.png';
@@ -8,10 +9,13 @@ const secondSocialSrc = '/socials/gmail.png';
 const githubMoonSrc = '/socials/githubmoon.png';
 
 const MoonLeft = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <div
-        className={`absolute animate-fade-in top-[-145px] right-[0px] translate-x-[150px] z-20 group pointer-events-auto `}
+        ref={ref}
+        className={`absolute opacity-0 top-[-145px] right-[0px] translate-x-[150px] z-20 group pointer-events-auto `}
       >
         <div className={'relative '}>
           <Image
@@ -19,6 +23,9 @@ const MoonLeft = () => {
             alt={'Moon with socials'}
             width={300}
             height={300}
+            onLoad={() => {
+              startFadeIn(ref);
+            }}
           />
         </div>
         <div
@@ -37,8 +44,6 @@ const MoonLeft = () => {
             height={90}
           />
         </a>
-
-        {/*minimoons*/}
 
         <div
           className={

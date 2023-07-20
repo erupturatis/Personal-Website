@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { startFadeIn } from '@typescript/misc';
 
 type IParamsHuskyScript = {
   leftEyeBaseX: number;
@@ -52,6 +53,7 @@ const reducer = (
 };
 
 const Husky = ({ width }: IHuskyProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   // standard size is 800x800
   const baseSize = useRef(0);
   const [triggerRender, setTriggerRender] = useState(false);
@@ -129,11 +131,12 @@ const Husky = ({ width }: IHuskyProps) => {
   const huskyPath = '/husky/minihusky.webp';
 
   return (
-    <>
+    <div className={'opacity-0'} ref={ref}>
       <svg
         id='huskySvg'
         width={(baseSize.current * 2) / 3}
         height={baseSize.current}
+        className={''}
       >
         <image
           id='lefteye'
@@ -149,9 +152,15 @@ const Husky = ({ width }: IHuskyProps) => {
           y={baseSize.current * 0.358}
           xlinkHref={rightEyePath}
         />
-        <image height={baseSize.current} xlinkHref={huskyPath} />
+        <image
+          height={baseSize.current}
+          onLoad={() => {
+            startFadeIn(ref);
+          }}
+          xlinkHref={huskyPath}
+        />
       </svg>
-    </>
+    </div>
   );
 };
 
