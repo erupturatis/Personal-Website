@@ -25,13 +25,17 @@ const ButtonsBottom = dynamic(() => import('@components/home/ButtonsBottom'), {
 const Home = () => {
   const [loadInterests, setLoadInterests] = useState(false);
   const [loadNotVisible, setLoadNotVisible] = useState(false);
+  const [loadHer, setLoadHer] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setLoadInterests(true);
+      setLoadHer(true);
     }, 400);
     setTimeout(() => {
-      setLoadNotVisible(true);
+      setLoadInterests(true);
     }, 600);
+    setTimeout(() => {
+      setLoadNotVisible(true);
+    }, 1000);
   }, []);
 
   return (
@@ -43,7 +47,7 @@ const Home = () => {
         />
         <title>Home</title>
       </Head>
-      <Hero />
+      {loadHer && <Hero />}
       {loadInterests && <Interests />}
       {loadNotVisible && <Skills />}
       {loadNotVisible && <ButtonsBottom />}
