@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Mobile from './Mobile';
 import Desktop from './Desktop';
-import { MoonCenter, MoonLeft } from '@components/navbar/Moon';
 import useIsMobile from '@hooks/useIsMobile';
+import dynamic from 'next/dynamic';
+
+const MoonLeft = dynamic(() => import('@components/navbar/MoonLeft'), {
+  ssr: false,
+});
+
+const MoonCenter = dynamic(() => import('@components/navbar/MoonCenter'), {
+  ssr: false,
+});
 
 const Navbar = () => {
   const [detected, isMobile] = useIsMobile();
+
+  const [loadMoon, setLoadMoon] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadMoon(true);
+    }, 250);
+  }, []);
 
   return (
     <>
@@ -14,7 +29,7 @@ const Navbar = () => {
         <div
           className={`w-full  h-10 absolute top-0 overflow-visible overflow-x-clip `}
         >
-          <MoonLeft />
+          {loadMoon && !isMobile && <MoonLeft />}
         </div>
       </div>
       <div className='xl:hidden'>
@@ -22,7 +37,7 @@ const Navbar = () => {
         <div
           className={`w-full  h-10 absolute top-0 overflow-visible overflow-x-clip `}
         >
-          <MoonCenter />
+          {loadMoon && isMobile && <MoonCenter />}
         </div>
       </div>
     </>
