@@ -11,7 +11,7 @@ const firstSocialSrc = '/socials/linkdin.png';
 const secondSocialSrc = '/socials/gmail.png';
 const githubMoonSrc = '/socials/githubmoon.png';
 
-const MoonLeft = () => {
+export const MoonLeft = () => {
   return (
     <>
       <div
@@ -103,7 +103,7 @@ const MoonLeft = () => {
   );
 };
 
-const MoonCenter = () => {
+export const MoonCenter = () => {
   return (
     <section className={` relative w-full flex justify-center `}>
       <div className={'w-[150px] h-[150px] relative'}>
@@ -120,15 +120,3 @@ const MoonCenter = () => {
     </section>
   );
 };
-
-const Moon = ({ positioning }: IMoonProps) => {
-  return (
-    <div
-      className={`w-full  h-10 absolute top-0 overflow-visible overflow-x-clip `}
-    >
-      {positioning === 'center' ? <MoonCenter /> : <MoonLeft />}
-    </div>
-  );
-};
-
-export default Moon;
