@@ -69,7 +69,7 @@ export const neuralAesthetics: IProject = {
 export const ageOfWarAI: IProject = {
   title: 'Age of war AI',
   description: `
-  Age of war AI, a project that I spent an abhorent amount of time on, that turned into massive spagheti code.
+  Age of war AI, a project that I spent an abhorrent amount of time on, that turned into massive spaghetti code.
   It was meant to create an agent that could play the game Age of War, a simple flash game.
   It was an eye-opener that showed me how much more I had to learn because I was lacking ( and I still do most likely ) in all fields.
       `,
