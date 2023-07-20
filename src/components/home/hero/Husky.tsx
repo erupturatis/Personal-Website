@@ -86,7 +86,7 @@ const Husky = ({ width }: IHuskyProps) => {
         addEvent,
         addAnimation,
       };
-      new HuskyObject(params);
+      // new HuskyObject(params);
     });
   }
   // for desktop screens

@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoadHer(true);
-    }, 400);
+    }, 100);
     setTimeout(() => {
       setLoadInterests(true);
     }, 600);

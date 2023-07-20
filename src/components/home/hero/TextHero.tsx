@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '@styles/hero.module.css';
+//
+// const montserrat = Montserrat({
+//   weight: ['300', '400', '500', '600', '700'],
+//   subsets: ['latin'],
+//   variable: '--font-montserrat',
+// });
+//
+// const questrial = Questrial({
+//   weight: ['400'],
+//   subsets: ['latin'],
+//   variable: '--font-questrial',
+// });
+//
 
-import { Montserrat, Questrial } from 'next/font/google';
-
-const montserrat = Montserrat({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-});
-
-const questrial = Questrial({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-questrial',
-});
-
+const montserrat = {
+  className: '',
+};
+const questrial = {
+  className: '',
+};
 const TextHero = () => {
   const [word, setWord] = useState(true);
 
@@ -48,8 +53,8 @@ const TextHero = () => {
               className={`text-center relative pb-2 text-3xl md:text-7xl font-bold`}
             >
               <h1
-                className={`${montserrat.className} ${styles.colorName} ${
-                  word ? '' : styles.colorNameInactive
+                className={`${montserrat.className} ${styles.colorName1} ${
+                  word ? '' : styles.colorNameInactive1
                 }`}
               >
                 Barbulescu
@@ -59,8 +64,8 @@ const TextHero = () => {
               className={`ml-3 xl:ml-6 ${
                 montserrat.className
               } relative text-center text-3xl md:text-7xl font-bold pb-2 ${
-                styles.colorName
-              } ${!word ? '' : styles.colorNameInactive}`}
+                styles.colorName1
+              } ${!word ? '' : styles.colorNameInactive1}`}
             >
               Eugen
             </h1>
