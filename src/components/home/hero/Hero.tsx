@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useWindowWidth from '@hooks/useWindowWidth';
 import HuskyRenderWrapper from '@components/home/hero/HuskyRenderWrapper';
-import TextHero from '@components/home/hero/TextHero';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
@@ -16,7 +15,7 @@ const Hero = () => {
   const [textHero, setTextHero] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setRenderHusky(false);
+      setRenderHusky(true);
     }, 300);
   }, []);
 
@@ -29,7 +28,7 @@ const Hero = () => {
         />
       </Head>
       <div>
-        <TextHero />
+        {/*<TextHero />*/}
         <div
           className={`  ${
             width.current > 1280
