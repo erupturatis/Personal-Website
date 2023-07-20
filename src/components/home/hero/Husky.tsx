@@ -64,7 +64,7 @@ const Husky = ({ width }: IHuskyProps) => {
     dispatch({ type: 'ADD_LISTENER', payload: newEvent });
   };
 
-  function addEyeFollowingBehavior(boundedWidth: number, scale: number) {
+  async function addEyeFollowingBehavior(boundedWidth: number, scale: number) {
     // dynamic imports, don't overload initial page load
     import('@typescript/husky/husky-script').then(({ HuskyObject }) => {
       const scrollEyes = boundedWidth < 1280;
@@ -86,7 +86,7 @@ const Husky = ({ width }: IHuskyProps) => {
         addEvent,
         addAnimation,
       };
-      // new HuskyObject(params);
+      new HuskyObject(params);
     });
   }
   // for desktop screens
@@ -101,8 +101,6 @@ const Husky = ({ width }: IHuskyProps) => {
     const scrollEyes = boundedWidth < 1280;
     baseSize.current = 800 * scale;
     setTriggerRender((prev) => !prev);
-
-    console.log('base size is 800');
 
     setTimeout(() => {
       addEyeFollowingBehavior(boundedWidth, scale);

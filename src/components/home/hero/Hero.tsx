@@ -20,9 +20,9 @@ const Hero = () => {
   useEffect(() => {
     setTimeout(() => {
       setTextHero(true);
-    }, 200);
+    }, 100);
     setTimeout(() => {
-      setRenderHusky(true);
+      setRenderHusky(false);
     }, 300);
   }, []);
 
