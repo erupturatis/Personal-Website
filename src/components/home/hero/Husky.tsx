@@ -70,6 +70,8 @@ const Husky = ({ width }: IHuskyProps) => {
       const scrollEyes = boundedWidth < 1280;
       const { current: base } = baseSize;
 
+      console.log('base');
+
       const params: IParamsHuskyScript = {
         // rations for the eye placement on the huskies face
         leftEyeBaseX: base * 0.088,
@@ -102,7 +104,10 @@ const Husky = ({ width }: IHuskyProps) => {
     baseSize.current = 800 * scale;
     setTriggerRender((prev) => !prev);
 
+    console.log('triggerRender');
+
     setTimeout(() => {
+      console.log('add eye following');
       addEyeFollowingBehavior(boundedWidth, scale);
     }, 200);
   }, []);
