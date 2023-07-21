@@ -26,7 +26,7 @@ const BigProjectsList = () => {
   return (
     <div
       className={
-        'w-full flex flex-wrap flex-col lg:flex-row gap-20 items-center justify-center mt-48'
+        'w-full overflow-visible overflow-x-clip flex flex-wrap flex-col lg:flex-row gap-20 items-center justify-center mt-48'
       }
     >
       {bigProjectListL.map((project) => {

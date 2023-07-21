@@ -125,7 +125,7 @@ const PhotoPreview = ({ pictureUrl }: { pictureUrl: string }) => {
   return (
     <div
       className={
-        'w-[300px] lg:w-[550px] h-96 opacity-0 z-10 transition-opacity duration-200 group-hover:opacity-100  '
+        ' md:w-[300px] lg:w-[550px] h-96 opacity-0 z-10 transition-opacity duration-200 group-hover:opacity-100  '
       }
     >
       <Image
@@ -148,7 +148,7 @@ const BigProject = ({
   return (
     <article
       className={
-        'w-[300px] lg:w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black rounded-2xl flex flex-col'
+        'w-full overflow-visible overflow-x-clip lg:w-[550px] h-96 group border-[1px] border-white relative border-opacity-30 bg-black border-x-0 lg:border-x-2 lg:rounded-2xl flex flex-col'
       }
     >
       <ConsoleNavbar githubUrl={githubUrl} websiteUrl={websiteUrl} />
